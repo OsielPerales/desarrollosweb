@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin:0; padding:0; background: var(--bg-2); }
+  .card { padding: 24px 28px; }
+  .row { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: baseline; padding: 6px 0; }
+  .row + .row { border-top: 1px dashed var(--border); }
+  .spec { font-family: var(--mono); font-size: 11px; color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.05em; }
+  .h1 { font-family: var(--serif-display); font-weight: 700; color: #2A4B7C; font-size: 36px; line-height: 1.2; }
+  .h2 { font-family: var(--serif-display); font-weight: 700; color: #2A4B7C; font-size: 26px; line-height: 1.25; }
+  .h3 { font-family: 'Inter', sans-serif; font-weight: 600; color: #333; font-size: 20px; }
+  .h4 { font-family: 'Inter', sans-serif; font-weight: 600; color: #333; font-size: 16px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="row"><span class="h1">Títulos de sección</span><span class="spec">Baskerville 700 · 48</span></div>
+  <div class="row"><span class="h2">Subsecciones editoriales</span><span class="spec">Baskerville 700 · 36</span></div>
+  <div class="row"><span class="h3">Heading de interfaz</span><span class="spec">Inter 600 · 24</span></div>
+  <div class="row"><span class="h4">Etiqueta secundaria</span><span class="spec">Inter 600 · 20</span></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bg-2); }
+  .card { padding: 24px; }
+  .row { display: flex; gap: 12px; align-items: stretch; }
+  .sw { flex: 1; border-radius: var(--r-card); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; min-height: 88px; box-shadow: var(--shadow-sm); }
+  .sw .name { font-family: var(--sans); font-weight: 600; font-size: 13px; }
+  .sw .hex { font-family: var(--mono); font-size: 11px; opacity: 0.75; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="row">
+    <div class="sw" style="background:#FFFFFF;color:#333;border:1px solid var(--border);">
+      <span class="name">Background</span><span class="hex">#FFFFFF</span>
+    </div>
+    <div class="sw" style="background:#F9F9F7;color:#333;border:1px solid var(--border);">
+      <span class="name">Warm BG</span><span class="hex">#F9F9F7</span>
+    </div>
+    <div class="sw" style="background:#333333;color:#F9F9F7;">
+      <span class="name">Carbón</span><span class="hex">#333333</span>
+    </div>
+    <div class="sw" style="background:#E07A5F;color:#fff;">
+      <span class="name">Burnt Orange</span><span class="hex">#E07A5F</span>
+    </div>
+    <div class="sw" style="background:#2A4B7C;color:#fff;">
+      <span class="name">Cobalt Blue</span><span class="hex">#2A4B7C</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

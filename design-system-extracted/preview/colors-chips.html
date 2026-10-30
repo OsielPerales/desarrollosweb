@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin:0; padding:0; background: var(--bg-2); }
+  .card { padding: 24px; }
+  .row { display: flex; gap: 12px; }
+  .sw { flex: 1; border-radius: var(--r-card); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; min-height: 88px; box-shadow: var(--shadow-sm); }
+  .name { font-family: var(--sans); font-weight: 600; font-size: 13px; }
+  .hex { font-family: var(--mono); font-size: 11px; opacity: 0.75; }
+  .chips { display: flex; gap: 8px; margin-top: 8px; }
+  .chip { padding: 4px 10px; border-radius: 100px; font-family: var(--sans); font-size: 12px; font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="row">
+    <div class="sw" style="background:#D4E5DF;color:#1F4A3A;">
+      <div><span class="name">Mint</span><div class="chips"><span class="chip" style="background:rgba(255,255,255,0.5);color:#1F4A3A;">Activo</span><span class="chip" style="background:#1F4A3A;color:#D4E5DF;">Seleccionado</span></div></div>
+      <span class="hex">#D4E5DF</span>
+    </div>
+    <div class="sw" style="background:#E6E1F0;color:#3D2E5C;">
+      <div><span class="name">Lavender</span><div class="chips"><span class="chip" style="background:rgba(255,255,255,0.5);color:#3D2E5C;">Borrador</span><span class="chip" style="background:#3D2E5C;color:#E6E1F0;">Archivado</span></div></div>
+      <span class="hex">#E6E1F0</span>
+    </div>
+    <div class="sw" style="background:#E8E6E1;color:#333;">
+      <span class="name">Border</span><span class="hex">#E8E6E1</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

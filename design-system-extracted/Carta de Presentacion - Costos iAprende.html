@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Carta de Presentación — Capacitación iAprende</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  :root {
+    --ia-blue: #2A4B7C;
+    --ia-orange: #E07A5F;
+    --ink: #2A2A2A;
+  }
+  html, body { margin: 0; padding: 0; background: #EEEAE3; }
+  .page {
+    max-width: 920px; margin: 32px auto; background: #FFFFFF;
+    box-shadow: 0 12px 48px rgba(51,51,51,0.10);
+    padding: 72px 80px 96px; position: relative; overflow: hidden;
+  }
+  .page::before {
+    content: ""; position: absolute; top: -140px; right: -120px;
+    width: 340px; height: 340px; border-radius: 50%;
+    background: #F4DDD4; opacity: 0.55; z-index: 0;
+  }
+  .page::after {
+    content: ""; position: absolute; bottom: -80px; left: -80px;
+    width: 220px; height: 220px; border-radius: 50%;
+    background: #D4E5DF; opacity: 0.35; z-index: 0;
+  }
+  .page > * { position: relative; z-index: 1; }
+
+  /* Header */
+  .masthead {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    padding-bottom: 28px; border-bottom: 2px solid var(--ia-blue); margin-bottom: 48px;
+  }
+  .masthead-left { display: flex; align-items: center; gap: 18px; }
+  .logo-de { height: 52px; width: auto; display: block; }
+  .divider { width: 1px; height: 48px; background: #CFCBC3; }
+  .logo-ia { height: 56px; width: auto; display: block; }
+  .masthead-right {
+    font-family: var(--mono); font-size: 10px; color: #8A8A8A;
+    text-transform: uppercase; letter-spacing: 0.14em; text-align: right; line-height: 1.8;
+  }
+  .masthead-right strong { color: var(--ia-blue); font-weight: 600; letter-spacing: 0.1em; }
+
+  /* Eyebrow + title */
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--ia-orange); text-transform: uppercase; letter-spacing: 0.18em;
+    margin-bottom: 14px; font-weight: 500;
+  }
+  h1.carta-title {
+    font-family: var(--serif-display); font-weight: 700;
+    font-size: 46px; line-height: 1.1; color: var(--ia-blue);
+    margin: 0 0 20px; letter-spacing: -0.015em; text-wrap: balance;
+  }
+  .subtitle {
+    font-family: var(--serif-display); font-style: italic; font-weight: 400;
+    font-size: 20px; line-height: 1.5; color: #444;
+    max-width: 62ch; margin: 0 0 44px;
+  }
+
+  /* Salutation block */
+  .salutation {
+    font-family: var(--sans); font-size: 15px; color: #333;
+    line-height: 1.7; max-width: 62ch; margin-bottom: 48px;
+  }
+  .salutation p { margin: 0 0 14px; }
+  .salutation .pill {
+    display: inline-block; background: #F9F9F7; border: 1px solid var(--border);
+    padding: 2px 10px; border-radius: 100px;
+    font-family: var(--mono); font-size: 11px; color: var(--ia-blue);
+    margin: 0 4px; vertical-align: 2px;
+  }
+
+  /* Section heading */
+  h2.sec {
+    font-family: var(--serif-display); font-weight: 700;
+    font-size: 26px; color: var(--ia-blue); margin: 56px 0 20px 0;
+    letter-spacing: -0.005em; display: flex; align-items: baseline; gap: 14px;
+  }
+  h2.sec .num {
+    font-family: var(--mono); font-size: 12px; color: var(--ia-orange);
+    font-weight: 500; letter-spacing: 0.12em;
+  }
+  h2.sec .line {
+    flex: 1; height: 1px; background: var(--border);
+    align-self: center; margin-left: 8px;
+  }
+
+  /* Service block */
+  .service {
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 28px 30px; background: #FFFFFF; margin-bottom: 18px;
+    position: relative; transition: box-shadow 240ms var(--ease), border-color 240ms var(--ease);
+  }
+  .service:hover { box-shadow: var(--shadow-md); border-color: #E0DCCF; }
+  .service.highlight {
+    border-color: var(--ia-orange); border-width: 1.5px;
+    background: linear-gradient(180deg, #FFF9F6 0%, #FFFFFF 70%);
+  }
+  .service-head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 20px; margin-bottom: 14px;
+  }
+  .service-title {
+    font-family: var(--sans); font-weight: 600; font-size: 19px;
+    color: var(--ia-blue); margin: 0; line-height: 1.3;
+  }
+  .service-title .level {
+    display: inline-block; font-family: var(--mono); font-size: 10px;
+    font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ia-orange); background: rgba(224,122,95,0.12);
+    padding: 2px 8px; border-radius: 4px; margin-right: 10px; vertical-align: 3px;
+  }
+  .service-desc {
+    font-family: var(--sans); font-size: 14px; line-height: 1.6;
+    color: #555; margin: 0 0 14px; max-width: 54ch;
+  }
+  .price-tag {
+    flex-shrink: 0; text-align: right; padding-left: 16px;
+    border-left: 1px solid var(--border); min-width: 180px;
+  }
+  .price-main {
+    font-family: var(--serif-display); font-weight: 700;
+    font-size: 26px; color: var(--ia-blue); line-height: 1; margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .price-main .currency { font-size: 14px; color: var(--fg-3); margin-right: 3px; }
+  .price-unit {
+    font-family: var(--mono); font-size: 10px; color: #8A8A8A;
+    text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px;
+  }
+  .price-note {
+    font-family: var(--sans); font-size: 12px; color: var(--ia-orange);
+    margin-top: 6px; font-weight: 500;
+  }
+
+  .service-meta {
+    display: flex; gap: 18px; flex-wrap: wrap; padding-top: 14px;
+    border-top: 1px dashed var(--border); font-family: var(--sans); font-size: 13px;
+  }
+  .service-meta span { color: #5C5C5C; }
+  .service-meta strong { color: var(--ink); font-weight: 600; }
+
+  /* Talks row */
+  .talks {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    margin-top: 10px;
+  }
+  .talk {
+    background: #F9F9F7; border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px; transition: transform 240ms var(--ease), box-shadow 240ms var(--ease);
+  }
+  .talk:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+  .talk-dur {
+    font-family: var(--mono); font-size: 10px; color: var(--ia-orange);
+    letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500;
+  }
+  .talk-title {
+    font-family: var(--serif-display); font-weight: 700; font-size: 16px;
+    color: var(--ia-blue); line-height: 1.3; margin: 8px 0 8px; text-wrap: balance;
+  }
+  .talk-desc {
+    font-family: var(--sans); font-size: 12.5px; line-height: 1.55; color: #5C5C5C; margin: 0;
+  }
+
+  /* Why us */
+  .why {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+    margin-top: 12px;
+  }
+  .why-item .why-num {
+    font-family: var(--serif-display); font-weight: 700;
+    font-size: 36px; color: var(--ia-orange); line-height: 1; margin-bottom: 10px;
+  }
+  .why-item h4 {
+    font-family: var(--sans); font-weight: 600; font-size: 15px;
+    color: var(--ia-blue); margin: 0 0 6px;
+  }
+  .why-item p {
+    font-family: var(--sans); font-size: 13px; line-height: 1.55;
+    color: #5C5C5C; margin: 0;
+  }
+
+  /* Audience bar */
+  .audience-ribbon {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #2A4B7C; color: #fff; padding: 8px 18px; border-radius: 100px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; font-weight: 500; margin-bottom: 24px;
+  }
+  .audience-ribbon .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ia-orange); }
+
+  /* CTA */
+  .cta-block {
+    background: var(--ia-blue); color: #F4EDE4; border-radius: 14px;
+    padding: 40px 44px; margin-top: 56px; display: grid;
+    grid-template-columns: 1.5fr 1fr; gap: 32px; align-items: center;
+  }
+  .cta-block h3 {
+    font-family: var(--serif-display); font-weight: 700; font-size: 26px;
+    color: #FFF; margin: 0 0 10px; letter-spacing: -0.005em;
+  }
+  .cta-block p {
+    font-family: var(--sans); font-size: 14px; line-height: 1.6;
+    color: rgba(255,255,255,0.8); margin: 0;
+  }
+  .cta-btns { display: flex; flex-direction: column; gap: 10px; }
+  .cta-btn {
+    background: var(--ia-orange); color: #fff; border: none;
+    padding: 14px 20px; border-radius: 8px;
+    font-family: var(--sans); font-weight: 600; font-size: 14px;
+    cursor: pointer; text-align: left; display: flex;
+    align-items: center; justify-content: space-between;
+    transition: background 240ms var(--ease);
+  }
+  .cta-btn:hover { background: #C96647; }
+  .cta-btn.outline {
+    background: transparent; border: 1px solid rgba(255,255,255,0.35); color: #fff;
+  }
+  .cta-btn.outline:hover { background: rgba(255,255,255,0.08); border-color: #fff; }
+  .cta-btn small {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7;
+    margin-left: 16px;
+  }
+
+  /* Footer */
+  .carta-foot {
+    margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: var(--mono); font-size: 10px; color: #8A8A8A;
+    text-transform: uppercase; letter-spacing: 0.12em; line-height: 1.8;
+  }
+  .carta-foot .sig {
+    font-family: var(--serif-display); font-style: italic; font-weight: 400;
+    font-size: 14px; color: var(--ia-blue); letter-spacing: 0; text-transform: none;
+  }
+  .carta-foot strong { color: var(--ia-blue); }
+
+  /* Tweaks panel */
+  .tweaks {
+    position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+    background: #FFF; border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 16px 48px rgba(51,51,51,0.15);
+    padding: 18px 20px; width: 260px; font-family: var(--sans);
+    display: none;
+  }
+  .tweaks.on { display: block; }
+  .tweaks h4 {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    color: #8A8A8A; text-transform: uppercase; letter-spacing: 0.14em;
+    margin: 0 0 14px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .tweaks h4 span { color: var(--ia-orange); }
+  .tweaks label {
+    display: block; font-size: 11px; color: #5C5C5C;
+    font-family: var(--mono); letter-spacing: 0.08em;
+    text-transform: uppercase; margin: 12px 0 6px;
+  }
+  .tweaks .options {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+  }
+  .tweaks .opt {
+    padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px;
+    background: #FFF; font-size: 12px; font-weight: 500; color: #333;
+    cursor: pointer; text-align: center; transition: all 180ms;
+    font-family: var(--sans);
+  }
+  .tweaks .opt:hover { border-color: var(--ia-orange); }
+  .tweaks .opt.active { background: var(--ia-blue); color: #fff; border-color: var(--ia-blue); }
+
+  /* Print */
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; max-width: none; padding: 48px 56px; }
+    .tweaks { display: none !important; }
+    .service:hover, .talk:hover { transform: none; box-shadow: none; }
+  }
+
+  /* Hide-on-audience utility */
+  [data-only]:not(.show) { display: none; }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <!-- Masthead -->
+  <div class="masthead">
+    <div class="masthead-left">
+      <img class="logo-de" src="assets/Desarrollos logo.jpg" alt="Desarrollos Elaborados">
+      <div class="divider"></div>
+      <img class="logo-ia" src="assets/Logo Iaprende.png" alt="iAprende">
+    </div>
+    <div class="masthead-right">
+      <strong>Carta de presentación</strong><br>
+      Servicios de capacitación · 2026<br>
+      Monclova, Coahuila · 866-116-0704
+    </div>
+  </div>
+
+  <!-- Title block (personalized per audience) -->
+  <div class="eyebrow" id="eyebrow">Para tomadores de decisión</div>
+  <div class="audience-ribbon"><span class="dot"></span><span id="audience-label">PyME · Empresa</span></div>
+
+  <h1 class="carta-title" id="carta-title">
+    Capacitación en IA que deja criterio, no slides.
+  </h1>
+
+  <p class="subtitle" id="carta-subtitle">
+    Formación práctica para que tu equipo use la IA con decisión y seguridad —
+    diseñada y operada desde el norte de México, con <em>skin in the game</em>.
+  </p>
+
+  <!-- Personalized letter -->
+  <div class="salutation" id="salutation">
+    <p><strong>Estimado tomador de decisión:</strong></p>
+    <p id="intro-body">
+      Le compartimos los servicios de capacitación de <span class="pill">iAprende</span>,
+      la rama de formación B2C de <span class="pill">Desarrollos Elaborados</span>. Somos una firma
+      del norte de México especializada en ingeniería cognitiva aplicada: antes de enseñar un
+      proceso, lo operamos en nuestras propias máquinas. Lo que su equipo aprenderá, nosotros
+      lo usamos cada día.
+    </p>
+    <p id="intro-extra">
+      Nuestro enfoque combina bases conceptuales, práctica guiada con Claude y Gemini, y diseño de
+      instrucciones proactivas — el habilidad bisagra que separa usar IA de <em>delegar</em> con IA.
+    </p>
+  </div>
+
+  <!-- SECTION 1: Curso 1 -->
+  <h2 class="sec">
+    <span class="num">01</span> Curso insignia <span class="line"></span>
+  </h2>
+
+  <div class="service highlight">
+    <div class="service-head">
+      <div>
+        <h3 class="service-title">
+          <span class="level">Nivel 1 · Certificable</span>
+          IA Estratégica y Diseño de Instrucciones
+        </h3>
+        <p class="service-desc">
+          2.5 horas presenciales. Fundamentos de IA generativa, diseño de instrucciones proactivas,
+          casos prácticos aplicables al mismo día. Incluye manual del participante y plantillas de uso.
+        </p>
+      </div>
+      <div class="price-tag">
+        <p class="price-main" id="curso1-price"><span class="currency">$</span>1,400<span style="font-size:14px;color:#8A8A8A;"> /persona</span></p>
+        <div class="price-unit" id="curso1-unit">Individual · precio lista</div>
+        <div class="price-note" id="curso1-note">Promo introducción: $1,200</div>
+      </div>
+    </div>
+    <div class="service-meta">
+      <span>🎯 <strong>Grupo estándar</strong> — hasta 15 personas · <strong>$12,000 MXN</strong> cerrado</span>
+      <span data-only="docente gobierno" class="show">🎓 <strong>Tarifa especial educación / gobierno</strong> — hasta 20 personas · <strong>$12,000 MXN</strong></span>
+      <span>Duración: <strong>2.5 hrs</strong></span>
+      <span>Formato: <strong>Presencial / In-company</strong></span>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Talks -->
+  <h2 class="sec">
+    <span class="num">02</span> Pláticas ejecutivas <span class="line"></span>
+  </h2>
+
+  <p class="service-desc" style="margin: 0 0 18px; max-width: 62ch;">
+    Tres pláticas de <strong>45 o 60 minutos</strong> diseñadas para despertar criterio en
+    liderazgos y equipos. Se agendan por separado o como antesala de un curso.
+  </p>
+
+  <div class="talks">
+    <div class="talk">
+      <div class="talk-dur">45 / 60 min</div>
+      <div class="talk-title">Artefactos con Claude</div>
+      <p class="talk-desc">
+        Pone en perspectiva la calidad real del trabajo que hoy produce la IA —
+        demostraciones en vivo, no promesas.
+      </p>
+    </div>
+    <div class="talk">
+      <div class="talk-dur">45 / 60 min</div>
+      <div class="talk-title">Seguridad en tiempos de IA</div>
+      <p class="talk-desc">
+        Riesgos modernos para empresas, sector educativo y gobierno.
+        Fundamental antes de cualquier adopción seria.
+      </p>
+    </div>
+    <div class="talk">
+      <div class="talk-dur">45 / 60 min</div>
+      <div class="talk-title">Calidad del trabajo con IA</div>
+      <p class="talk-desc">
+        Qué esperar hoy, qué no. Dónde la IA multiplica criterio humano
+        y dónde todavía lo confunde.
+      </p>
+    </div>
+  </div>
+  <div style="margin-top: 14px; font-family: var(--mono); font-size: 11px; color: #8A8A8A; letter-spacing: 0.08em;">
+    AGENDA O SOLICITA &nbsp;·&nbsp; <strong style="color: var(--ia-blue);">866-116-0704</strong> &nbsp;·&nbsp; osiel.perales@desarrolloselaborados.com
+  </div>
+
+  <!-- SECTION 3: Advanced -->
+  <h2 class="sec">
+    <span class="num">03</span> Programas extendidos <span class="line"></span>
+  </h2>
+
+  <div class="service">
+    <div class="service-head">
+      <div>
+        <h3 class="service-title">
+          <span class="level">Diplomado</span>
+          Productividad con IA — Alfabetización Digital 2.0
+        </h3>
+        <p class="service-desc">
+          Curso certificado multi-sesión. Cubre uso estratégico de IA generativa,
+          automatización de flujos cotidianos, higiene de datos y criterios de seguridad.
+          Ideal para áreas de RRHH, operaciones y educación continua.
+        </p>
+      </div>
+      <div class="price-tag">
+        <p class="price-main"><span class="currency">$</span>—</p>
+        <div class="price-unit">Cotización a medida</div>
+        <div class="price-note">Certificación incluida</div>
+      </div>
+    </div>
+    <div class="service-meta">
+      <span>Modalidad: <strong>In-company o sede iAprende</strong></span>
+      <span>Certificación: <strong>EC0301 CONOCER (opcional)</strong></span>
+      <span>Duración: <strong>A definir por plan</strong></span>
+    </div>
+  </div>
+
+  <div class="service">
+    <div class="service-head">
+      <div>
+        <h3 class="service-title">
+          <span class="level">Nivel 2 · A medida</span>
+          IA Aplicada a Procesos de Negocio
+        </h3>
+        <p class="service-desc">
+          Programa in-company de 8 a 12 horas. Diagnóstico de procesos,
+          diseño de asistentes por área, prototipo funcional al cierre del programa.
+        </p>
+      </div>
+      <div class="price-tag">
+        <p class="price-main"><span class="currency">$</span>22K<span style="font-size: 16px; color: #8A8A8A;">–38K</span></p>
+        <div class="price-unit">Por grupo · in-company</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Why iAprende -->
+  <h2 class="sec">
+    <span class="num">04</span> Por qué iAprende <span class="line"></span>
+  </h2>
+
+  <div class="why">
+    <div class="why-item">
+      <div class="why-num">01</div>
+      <h4>Skin in the game</h4>
+      <p>Lo que enseñamos lo operamos. Nuestra fábrica CNC es el primer laboratorio de todo lo que verá tu equipo.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">02</div>
+      <h4>Certificación oficial</h4>
+      <p>Instructores en proceso EC0301 CONOCER, con credenciales Microsoft AB-730, Google Gemini y Anthropic.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">03</div>
+      <h4>Norte de México primero</h4>
+      <p>Entendemos el contexto industrial, educativo y gubernamental local. Atendemos Monclova, Saltillo y Piedras Negras.</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <div>
+      <h3 id="cta-title">¿Listos para cotizar a su medida?</h3>
+      <p id="cta-sub">
+        Agendamos una llamada de 20 minutos para entender su contexto, ajustar el formato
+        al grupo y enviarle cotización con fecha y sede.
+      </p>
+    </div>
+    <div class="cta-btns">
+      <button class="cta-btn">Solicitar cotización <small>Recomendado</small></button>
+      <button class="cta-btn outline">Agendar plática 45 min <small>Sin costo</small></button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="carta-foot">
+    <div>
+      <div class="sig">Osiel Alejandro Perales Jiménez</div>
+      <strong>Director General</strong> · Desarrollos Elaborados · iAprende
+    </div>
+    <div style="text-align: right;">
+      <strong>Monclova, Coah.</strong><br>
+      Vigencia: 90 días a partir de emisión
+    </div>
+  </div>
+</div>
+
+<!-- Tweaks panel -->
+<div class="tweaks" id="tweaks">
+  <h4>Tweaks <span id="audience-tag">PyME</span></h4>
+  <label>Audiencia</label>
+  <div class="options">
+    <button class="opt" data-aud="pyme">PyME</button>
+    <button class="opt" data-aud="emprendedor">Emprendedor</button>
+    <button class="opt" data-aud="docente">Docente</button>
+    <button class="opt" data-aud="gobierno">Gobierno</button>
+  </div>
+  <label style="margin-top: 16px;">Acento visual</label>
+  <div class="options">
+    <button class="opt" data-accent="orange">Naranja</button>
+    <button class="opt" data-accent="cobalt">Cobalto</button>
+  </div>
+</div>
+
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "audience": "docente",
+  "accent": "orange"
+}/*EDITMODE-END*/;
+
+const AUDIENCES = {
+  pyme: {
+    label: "PyME · Empresa",
+    eyebrow: "Para dueños y directores de PyME",
+    title: "Capacitación en IA que deja criterio, no slides.",
+    subtitle: "Formación práctica para que tu equipo use la IA con decisión y seguridad — diseñada y operada desde el norte de México, con skin in the game.",
+    salute: "Estimado dueño o director:",
+    intro: "Le compartimos los servicios de capacitación de <span class='pill'>iAprende</span>, la rama B2C de <span class='pill'>Desarrollos Elaborados</span>. Sabemos que tiempo vale más que dinero en una PyME. Diseñamos cada sesión para que regrese a operación con herramientas funcionales desde el día uno — no con abstracciones.",
+    extra: "Hablamos el idioma del taller, la ferretería, la distribuidora, la clínica: procesos concretos, resultados medibles, lenguaje claro.",
+    ctaTitle: "¿Listos para cotizar a su medida?",
+    ctaSub: "Agendamos una llamada de 20 minutos para entender su operación y enviarle cotización con fecha y sede.",
+    show: []
+  },
+  emprendedor: {
+    label: "Emprendedor · Fundador",
+    eyebrow: "Para fundadores y equipos fundadores",
+    title: "IA como co-fundador silencioso.",
+    subtitle: "Instrucciones proactivas, artefactos útiles y criterio para decidir rápido — lo que separa al que <em>usa</em> IA del que <em>delega</em> con IA.",
+    salute: "Hola, fundador:",
+    intro: "Te compartimos los servicios de capacitación de <span class='pill'>iAprende</span>, la rama B2C de <span class='pill'>Desarrollos Elaborados</span>. Sabemos cómo se siente cuando cada hora cuenta doble. Estas sesiones están diseñadas para que salgas con algo funcionando, no con un diploma para enmarcar.",
+    extra: "Skin in the game, siempre. Todo lo que te vamos a enseñar, primero lo probamos en nuestras propias operaciones.",
+    ctaTitle: "¿Listo para poner IA a trabajar por ti?",
+    ctaSub: "Te agendamos una llamada de 20 minutos para entender tu contexto y ajustar la inversión a tu etapa.",
+    show: []
+  },
+  docente: {
+    label: "Docente · Sector educativo",
+    eyebrow: "Para directores académicos y docentes",
+    title: "IA en el aula, con criterio pedagógico.",
+    subtitle: "Formación docente diseñada por instructores certificados EC0301, con credenciales Microsoft, Google y Anthropic. Pensado en el aula mexicana.",
+    salute: "Estimado director académico:",
+    intro: "Le compartimos los servicios de capacitación de <span class='pill'>iAprende</span>, la rama B2C de <span class='pill'>Desarrollos Elaborados</span>. Diseñamos cada sesión pensando en la realidad del aula: normativa, ética académica, detección de uso estudiantil, diseño de consignas con IA y alfabetización digital del personal.",
+    extra: "Ofrecemos <strong>tarifa especial para sector educativo</strong>: grupos de hasta 20 personas por $12,000 MXN, sin sacrificar calidad pedagógica ni material de apoyo.",
+    ctaTitle: "¿Capacitamos a su claustro?",
+    ctaSub: "Agendamos una visita a su plantel, diagnosticamos necesidades y enviamos cotización con precio educación.",
+    show: ["docente"]
+  },
+  gobierno: {
+    label: "Gobierno · Sector público",
+    eyebrow: "Para áreas de innovación y capacitación gubernamental",
+    title: "Adopción de IA con seguridad y criterio de Estado.",
+    subtitle: "Formación práctica para cuerpos técnicos y mandos — con énfasis en seguridad, gobernanza de datos y casos aplicables a servicios públicos.",
+    salute: "Estimado titular:",
+    intro: "Le compartimos los servicios de capacitación de <span class='pill'>iAprende</span>, la rama B2C de <span class='pill'>Desarrollos Elaborados</span>. Entendemos el contexto: presupuesto defendible, seguridad de información, y cuerpos técnicos con niveles muy dispares de alfabetización digital. Nuestro programa cubre desde fundamentos hasta criterios de gobernanza.",
+    extra: "Ofrecemos <strong>tarifa especial para gobierno</strong>: grupos de hasta 20 personas por $12,000 MXN. Facturamos a persona moral y entregamos expediente técnico para soporte presupuestal.",
+    ctaTitle: "¿Capacitamos a su equipo?",
+    ctaSub: "Podemos agendar una plática sin costo con su cuerpo técnico y enviar cotización formal con expediente.",
+    show: ["gobierno"]
+  }
+};
+
+const state = { ...TWEAK_DEFAULTS };
+
+function applyAudience(key) {
+  const a = AUDIENCES[key];
+  if (!a) return;
+  document.getElementById('audience-label').textContent = a.label;
+  document.getElementById('audience-tag').textContent = a.label.split(' ')[0];
+  document.getElementById('eyebrow').textContent = a.eyebrow;
+  document.getElementById('carta-title').textContent = a.title;
+  document.getElementById('carta-subtitle').innerHTML = a.subtitle;
+  document.querySelector('#salutation p:first-child strong').textContent = a.salute;
+  document.getElementById('intro-body').innerHTML = a.intro;
+  document.getElementById('intro-extra').innerHTML = a.extra;
+  document.getElementById('cta-title').textContent = a.ctaTitle;
+  document.getElementById('cta-sub').textContent = a.ctaSub;
+
+  // Toggle conditional rows
+  document.querySelectorAll('[data-only]').forEach(el => {
+    const tokens = el.dataset.only.split(' ');
+    el.classList.toggle('show', a.show.some(s => tokens.includes(s)));
+  });
+
+  // Update tweaks active state
+  document.querySelectorAll('[data-aud]').forEach(b => {
+    b.classList.toggle('active', b.dataset.aud === key);
+  });
+}
+
+function applyAccent(key) {
+  const root = document.documentElement;
+  if (key === 'cobalt') {
+    root.style.setProperty('--ia-orange', '#2A4B7C');
+    root.style.setProperty('--ia-blue', '#1A2F52');
+  } else {
+    root.style.setProperty('--ia-orange', '#E07A5F');
+    root.style.setProperty('--ia-blue', '#2A4B7C');
+  }
+  document.querySelectorAll('[data-accent]').forEach(b => {
+    b.classList.toggle('active', b.dataset.accent === key);
+  });
+}
+
+// Init
+applyAudience(state.audience);
+applyAccent(state.accent);
+
+// Wire tweak buttons
+document.querySelectorAll('[data-aud]').forEach(b => {
+  b.addEventListener('click', () => {
+    state.audience = b.dataset.aud;
+    applyAudience(state.audience);
+    try { window.parent.postMessage({type:'__edit_mode_set_keys', edits:{audience: state.audience}}, '*'); } catch(e){}
+  });
+});
+document.querySelectorAll('[data-accent]').forEach(b => {
+  b.addEventListener('click', () => {
+    state.accent = b.dataset.accent;
+    applyAccent(state.accent);
+    try { window.parent.postMessage({type:'__edit_mode_set_keys', edits:{accent: state.accent}}, '*'); } catch(e){}
+  });
+});
+
+// Edit-mode wiring
+window.addEventListener('message', (e) => {
+  const d = e.data || {};
+  if (d.type === '__activate_edit_mode') document.getElementById('tweaks').classList.add('on');
+  if (d.type === '__deactivate_edit_mode') document.getElementById('tweaks').classList.remove('on');
+});
+try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(e){}
+</script>
+
+</body>
+</html>

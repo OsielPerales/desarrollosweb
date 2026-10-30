@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg-2);}
+  .card{padding:24px;display:flex;gap:18px;align-items:stretch;}
+  .ill{flex:1;aspect-ratio:3/2;border-radius:12px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
+  .lbl{font-family:var(--mono);font-size:10px;color:#8A8A8A;text-transform:uppercase;letter-spacing:0.08em;text-align:center;margin-top:8px;display:block;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div>
+    <div class="ill">
+      <svg viewBox="0 0 150 100" width="100%" height="100%">
+        <circle cx="50" cy="55" r="26" fill="#D4E5DF"/>
+        <rect x="70" y="30" width="54" height="54" rx="6" fill="#E07A5F"/>
+        <circle cx="108" cy="45" r="8" fill="#2A4B7C"/>
+        <path d="M20 85 L130 85" stroke="#333" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <span class="lbl">Flat editorial · shapes</span>
+  </div>
+  <div>
+    <div class="ill" style="background:linear-gradient(#fff,#fff);">
+      <svg viewBox="0 0 150 100" width="100%" height="100%">
+        <rect x="15" y="20" width="40" height="60" rx="4" fill="#E6E1F0"/>
+        <rect x="60" y="35" width="40" height="45" rx="4" fill="#D4E5DF"/>
+        <rect x="105" y="25" width="30" height="55" rx="4" fill="#F9F9F7" stroke="#2A4B7C" stroke-width="1.5"/>
+        <circle cx="75" cy="55" r="6" fill="#E07A5F"/>
+      </svg>
+    </div>
+    <span class="lbl">Geometric · no people</span>
+  </div>
+  <div>
+    <div class="ill">
+      <svg viewBox="0 0 150 100" width="100%" height="100%">
+        <path d="M20 70 Q 50 30 80 55 T 130 50" stroke="#2A4B7C" stroke-width="2" fill="none"/>
+        <circle cx="20" cy="70" r="4" fill="#E07A5F"/>
+        <circle cx="80" cy="55" r="4" fill="#E07A5F"/>
+        <circle cx="130" cy="50" r="4" fill="#E07A5F"/>
+        <rect x="15" y="80" width="120" height="2" fill="#E8E6E1"/>
+      </svg>
+    </div>
+    <span class="lbl">Line art · minimal</span>
+  </div>
+</div>
+</body>
+</html>

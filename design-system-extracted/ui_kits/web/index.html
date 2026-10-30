@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Editorial — UI kit</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: #fff; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react">
+// Inline all components so we avoid cross-file import complexity
+const { useState } = React;
+
+function Button({ variant = 'primary', children, onClick, type = 'button', disabled }) {
+  const [hover, setHover] = useState(false);
+  const base = {
+    fontFamily: 'Inter, system-ui, sans-serif',
+    fontWeight: 500, fontSize: 14,
+    padding: '10px 20px', borderRadius: 8,
+    border: 'none', cursor: disabled ? 'not-allowed' : 'pointer',
+    transition: 'all 240ms cubic-bezier(0.2,0.6,0.2,1)',
+    opacity: disabled ? 0.5 : 1,
+  };
+  const variants = {
+    primary: { background: hover ? '#C96647' : '#E07A5F', color: '#fff' },
+    secondary: { background: '#fff', color: '#333', border: '1px solid #E8E6E1' },
+    ghost: { background: 'transparent', color: hover ? '#E07A5F' : '#2A4B7C', padding: '10px 12px' },
+  };
+  return (
+    <button type={type} disabled={disabled} onClick={onClick}
+      onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+      style={{ ...base, ...variants[variant] }}>{children}</button>
+  );
+}
+
+function Chip({ tone = 'mint', children }) {
+  const tones = {
+    mint: { background: '#D4E5DF', color: '#1F4A3A' },
+    lavender: { background: '#E6E1F0', color: '#3D2E5C' },
+    neutral: { background: '#F9F9F7', color: '#333', border: '1px solid #E8E6E1' },
+    solid: { background: '#2A4B7C', color: '#fff' },
+    accent: { background: '#E07A5F', color: '#fff' },
+  };
+  return (
+    <span style={{
+      display: 'inline-flex', alignItems: 'center',
+      padding: '4px 12px', borderRadius: 100,
+      fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 500,
+      ...tones[tone],
+    }}>{children}</span>
+  );
+}
+
+function Nav({ active, onNavigate }) {
+  const items = ['Ensayos', 'Manifiesto', 'Herramientas', 'Contacto'];
+  return (
+    <nav style={{
+      display:'flex', alignItems:'center', justifyContent:'space-between',
+      padding:'20px 48px', background:'#fff', borderBottom:'1px solid #E8E6E1',
+      position:'sticky', top:0, zIndex:10,
+    }}>
+      <div style={{display:'flex', alignItems:'center', gap:10}}>
+        <div style={{width:32, height:32, borderRadius:8, background:'#2A4B7C', position:'relative'}}>
+          <div style={{position:'absolute', width:12, height:12, background:'#E07A5F', borderRadius:'50%', top:7, right:6}}/>
+        </div>
+        <span style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontWeight:700, fontSize:18, color:'#2A4B7C'}}>Editorial</span>
+      </div>
+      <div style={{display:'flex', gap:32}}>
+        {items.map(it => (
+          <button key={it} onClick={() => onNavigate(it)} style={{
+            background:'none', border:'none', cursor:'pointer',
+            fontFamily:'Inter, sans-serif', fontSize:14, fontWeight:500,
+            color: active === it ? '#E07A5F' : '#333', padding:0,
+            transition:'color 240ms',
+          }}>{it}</button>
+        ))}
+      </div>
+      <Button>Suscribirse</Button>
+    </nav>
+  );
+}
+
+function Hero({ onCTA }) {
+  return (
+    <section style={{padding:'96px 48px 72px', background:'#F9F9F7', position:'relative', overflow:'hidden'}}>
+      <div style={{position:'absolute', width:340, height:340, borderRadius:'50%', background:'#D4E5DF', opacity:0.35, top:-120, right:-80}}/>
+      <div style={{position:'absolute', width:220, height:220, borderRadius:'50%', background:'#E6E1F0', opacity:0.4, bottom:-60, left:200}}/>
+      <div style={{maxWidth:1200, margin:'0 auto', position:'relative'}}>
+        <span style={{fontFamily:"'JetBrains Mono', monospace", fontSize:11, letterSpacing:'0.12em', textTransform:'uppercase', color:'#8A8A8A'}}>Nº 014 · Abril 2026</span>
+        <h1 style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontWeight:700, fontSize:64, lineHeight:1.1, color:'#2A4B7C', margin:'16px 0 24px', maxWidth:760, letterSpacing:'-0.01em', textWrap:'balance'}}>
+          Herramientas que respetan tu tiempo.
+        </h1>
+        <p style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontStyle:'italic', fontSize:22, lineHeight:1.5, color:'#333', maxWidth:640, margin:'0 0 36px'}}>
+          Diseñamos cada decisión pensando en quien la va a usar mañana — y en diez años. El código que escribimos es el código que usamos.
+        </p>
+        <div style={{display:'flex', gap:12}}>
+          <Button onClick={onCTA}>Leer el manifiesto</Button>
+          <Button variant="secondary">Ver ensayos →</Button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ArticleCard({ tag, title, excerpt, date, mins, accent, onOpen }) {
+  const [hover, setHover] = useState(false);
+  return (
+    <article onClick={onOpen} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+      style={{
+        background:'#fff', borderRadius:12, padding:28,
+        boxShadow: hover ? '0 8px 24px rgba(51,51,51,0.08)' : '0 2px 8px rgba(51,51,51,0.06)',
+        transition:'box-shadow 240ms cubic-bezier(0.2,0.6,0.2,1)',
+        cursor:'pointer', display:'flex', flexDirection:'column', gap:14, height:'100%', boxSizing:'border-box',
+      }}>
+      {accent && <div style={{width:'100%', height:120, borderRadius:8, background:accent, marginBottom:6}}/>}
+      <Chip tone={tag === 'Ensayo' ? 'mint' : 'lavender'}>{tag}</Chip>
+      <h3 style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontWeight:700, fontSize:22, lineHeight:1.25, color:'#2A4B7C', margin:0, textWrap:'balance'}}>{title}</h3>
+      <p style={{fontFamily:'Inter, sans-serif', fontSize:14, lineHeight:1.55, color:'#5C5C5C', margin:0}}>{excerpt}</p>
+      <div style={{fontFamily:"'JetBrains Mono', monospace", fontSize:11, color:'#8A8A8A', textTransform:'uppercase', letterSpacing:'0.08em', marginTop:'auto', paddingTop:12, borderTop:'1px solid #E8E6E1'}}>
+        {date} · {mins} min
+      </div>
+    </article>
+  );
+}
+
+function ArticleGrid({ onOpenArticle }) {
+  const items = [
+    { tag:'Ensayo', title:'Por qué escribimos con skin in the game', excerpt:'Lo que publicamos lo usamos. Lo que recomendamos lo pagamos. El criterio se paga con consecuencias.', date:'21 ABR 2026', mins:6, accent:'#D4E5DF' },
+    { tag:'Caso', title:'Herramientas con memoria larga', excerpt:'Un software que sigue siendo útil en diez años, no en diez semanas. Tres decisiones de diseño.', date:'08 ABR 2026', mins:9, accent:'#E6E1F0' },
+    { tag:'Ensayo', title:'Contra la urgencia', excerpt:'La notificación es una factura emocional. Quien diseña interfaces decide cuándo cobrarla.', date:'31 MAR 2026', mins:4, accent:'#F4DDD4' },
+  ];
+  return (
+    <section style={{padding:'72px 48px', background:'#fff'}}>
+      <div style={{maxWidth:1200, margin:'0 auto'}}>
+        <div style={{display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:40}}>
+          <h2 style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontWeight:700, fontSize:36, color:'#2A4B7C', margin:0, letterSpacing:'-0.005em'}}>Ensayos recientes</h2>
+          <a href="#" style={{fontFamily:'Inter, sans-serif', fontSize:14, color:'#2A4B7C', textDecoration:'none', borderBottom:'1px solid currentColor', paddingBottom:2}}>Ver archivo completo →</a>
+        </div>
+        <div style={{display:'grid', gridTemplateColumns:'repeat(3, 1fr)', gap:24}}>
+          {items.map(i => <ArticleCard key={i.title} {...i} onOpen={() => onOpenArticle(i)}/>)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Quote() {
+  return (
+    <section style={{padding:'96px 48px', background:'#F9F9F7'}}>
+      <div style={{maxWidth:820, margin:'0 auto'}}>
+        <div style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontSize:72, color:'#E07A5F', lineHeight:1, marginBottom:-16}}>«</div>
+        <blockquote style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontWeight:700, fontSize:34, lineHeight:1.35, color:'#2A4B7C', margin:0, letterSpacing:'-0.005em', textWrap:'balance'}}>
+          No confíes en quien te vende algo que no usaría. La única credencial honesta es la cicatriz propia.
+        </blockquote>
+        <div style={{marginTop:28, fontFamily:"'JetBrains Mono', monospace", fontSize:11, color:'#8A8A8A', textTransform:'uppercase', letterSpacing:'0.1em'}}>— Del manifiesto interno, v3.2</div>
+      </div>
+    </section>
+  );
+}
+
+function Newsletter() {
+  const [email, setEmail] = useState('');
+  const [sent, setSent] = useState(false);
+  return (
+    <section style={{padding:'72px 48px', background:'#fff'}}>
+      <div style={{maxWidth:720, margin:'0 auto', background:'#F9F9F7', padding:'56px 48px', borderRadius:12, border:'1px solid #E8E6E1'}}>
+        <h2 style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontWeight:700, fontSize:32, color:'#2A4B7C', margin:'0 0 12px', letterSpacing:'-0.005em'}}>Una carta cada dos semanas.</h2>
+        <p style={{fontFamily:'Inter, sans-serif', fontSize:16, lineHeight:1.6, color:'#333', margin:'0 0 28px'}}>
+          Te escribimos sólo cuando tenemos algo que merece tu tiempo. Sin anuncios, sin seguimiento, sin urgencias falsas.
+        </p>
+        {sent ? (
+          <div style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontStyle:'italic', color:'#2A4B7C', fontSize:18}}>Listo. Te escribimos pronto.</div>
+        ) : (
+          <form onSubmit={(e) => {e.preventDefault(); setSent(true);}} style={{display:'flex', gap:10}}>
+            <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="tu@correo.com"
+              onFocus={e => {e.target.style.borderColor='#E07A5F'; e.target.style.boxShadow='0 0 0 3px rgba(224,122,95,0.15)';}}
+              onBlur={e => {e.target.style.borderColor='#E8E6E1'; e.target.style.boxShadow='none';}}
+              style={{flex:1, padding:'12px 16px', border:'1px solid #E8E6E1', borderRadius:8, fontFamily:'Inter, sans-serif', fontSize:15, color:'#333', background:'#fff', outline:'none'}}/>
+            <Button type="submit">Suscribirme</Button>
+          </form>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer style={{padding:'48px', background:'#2A4B7C', color:'#F9F9F7'}}>
+      <div style={{maxWidth:1200, margin:'0 auto', display:'grid', gridTemplateColumns:'2fr 1fr 1fr 1fr', gap:40, alignItems:'start'}}>
+        <div>
+          <div style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontWeight:700, fontSize:20, marginBottom:10}}>Editorial</div>
+          <p style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontStyle:'italic', fontSize:15, lineHeight:1.55, color:'rgba(249,249,247,0.75)', margin:0, maxWidth:320}}>
+            Humanismo tecnológico. Skin in the game. Construimos lo que usamos.
+          </p>
+        </div>
+        {[{h:'Lectura', links:['Ensayos','Manifiesto','Archivo']},{h:'Sobre', links:['Quiénes somos','Contacto','Prensa']},{h:'Legal', links:['Privacidad','Términos','Colofón']}].map(col => (
+          <div key={col.h}>
+            <div style={{fontFamily:"'JetBrains Mono', monospace", fontSize:10, letterSpacing:'0.12em', textTransform:'uppercase', color:'rgba(249,249,247,0.55)', marginBottom:14}}>{col.h}</div>
+            {col.links.map(l => <div key={l} style={{marginBottom:8}}><a href="#" style={{fontFamily:'Inter, sans-serif', fontSize:14, color:'#F9F9F7', textDecoration:'none'}}>{l}</a></div>)}
+          </div>
+        ))}
+      </div>
+      <div style={{maxWidth:1200, margin:'48px auto 0', paddingTop:24, borderTop:'1px solid rgba(249,249,247,0.15)', fontFamily:"'JetBrains Mono', monospace", fontSize:11, color:'rgba(249,249,247,0.55)', textTransform:'uppercase', letterSpacing:'0.08em'}}>
+        © 2026 Editorial · Hecho con cuidado
+      </div>
+    </footer>
+  );
+}
+
+function ArticleReader({ article, onBack }) {
+  return (
+    <div style={{background:'#fff', minHeight:'100vh'}}>
+      <div style={{maxWidth:720, margin:'0 auto', padding:'72px 32px'}}>
+        <button onClick={onBack} style={{background:'none', border:'none', color:'#2A4B7C', fontFamily:'Inter, sans-serif', fontSize:14, cursor:'pointer', padding:0, marginBottom:32}}>← Volver</button>
+        <Chip tone={article.tag === 'Ensayo' ? 'mint' : 'lavender'}>{article.tag}</Chip>
+        <h1 style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontWeight:700, fontSize:48, lineHeight:1.15, color:'#2A4B7C', margin:'20px 0 16px', letterSpacing:'-0.01em', textWrap:'balance'}}>{article.title}</h1>
+        <div style={{fontFamily:"'JetBrains Mono', monospace", fontSize:11, color:'#8A8A8A', textTransform:'uppercase', letterSpacing:'0.08em', marginBottom:40}}>{article.date} · {article.mins} min</div>
+        <p style={{fontFamily:"'Libre Baskerville', Georgia, serif", fontStyle:'italic', fontSize:22, lineHeight:1.5, color:'#333'}}>{article.excerpt}</p>
+        <p style={{fontFamily:'Inter, sans-serif', fontSize:17, lineHeight:1.7, color:'#333', margin:'24px 0'}}>
+          Lo que publicamos lo usamos. Lo que recomendamos lo pagamos. En esta casa el criterio se paga
+          con consecuencias — y por eso cuesta más, y por eso dura más. Es la única forma de escribir
+          sobre herramientas que hemos encontrado.
+        </p>
+        <p style={{fontFamily:'Inter, sans-serif', fontSize:17, lineHeight:1.7, color:'#333', margin:'24px 0'}}>
+          No hablamos de productos que no hemos apagado y encendido diez veces. No recomendamos flujos
+          que no hemos recorrido nosotros mismos, de principio a fin, con nuestros propios datos.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [active, setActive] = useState('Ensayos');
+  const [article, setArticle] = useState(null);
+
+  if (article) return <ArticleReader article={article} onBack={() => setArticle(null)}/>;
+
+  return (
+    <div>
+      <Nav active={active} onNavigate={setActive}/>
+      <Hero/>
+      <ArticleGrid onOpenArticle={setArticle}/>
+      <Quote/>
+      <Newsletter/>
+      <Footer/>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Desarrollos Elaborados — robots.txt
+# https://desarrolloselaborados.com
+
+User-agent: *
+Allow: /
+Disallow: /hub/
+Disallow: /hub/login
+Disallow: /hub/cotizaciones
+Disallow: /hub/clientes
+Disallow: /hub/analitica
+Disallow: /hub/inbox
+Disallow: /hub/prospector
+Disallow: /hub/campanas
+Disallow: /hub/config
+
+# Sitemap
+Sitemap: https://desarrolloselaborados.com/sitemap.xml

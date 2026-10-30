@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg-2);}
+  .card{padding:26px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .chip{font-family:'Inter';font-size:13px;font-weight:500;padding:6px 14px;border-radius:100px;display:inline-flex;align-items:center;gap:6px;}
+  .dot{width:6px;height:6px;border-radius:50%;}
+  .mint{background:#D4E5DF;color:#1F4A3A;}
+  .lav{background:#E6E1F0;color:#3D2E5C;}
+  .neutral{background:#F9F9F7;color:#333;border:1px solid var(--border);}
+  .solid-blue{background:#2A4B7C;color:#fff;}
+  .solid-orange{background:#E07A5F;color:#fff;}
+</style>
+</head>
+<body>
+<div class="card">
+  <span class="chip mint"><span class="dot" style="background:#1F4A3A;"></span>Publicado</span>
+  <span class="chip lav">Borrador</span>
+  <span class="chip neutral">Sin etiquetar</span>
+  <span class="chip solid-blue">Destacado</span>
+  <span class="chip solid-orange">Nuevo</span>
+  <span class="chip mint">Humanismo</span>
+  <span class="chip lav">Ensayo</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-iaprende/
+dist-hub/
+functions/lib/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+*.local
+
+# Firebase local state
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+.firebaserc.local
+
+# Cache and logs
+.vite/
+*.tsbuildinfo
+logs/
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg-2);}
+  .card{padding:24px;display:flex;gap:20px;align-items:center;justify-content:space-around;}
+  .sample{display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .box{width:120px;height:72px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:#8A8A8A;}
+  .lbl{font-family:var(--mono);font-size:10px;color:#333;text-transform:uppercase;letter-spacing:0.08em;}
+  .val{font-family:var(--mono);font-size:10px;color:#8A8A8A;}
+  .chip{padding:6px 14px;background:#D4E5DF;color:#1F4A3A;font-family:var(--sans);font-size:12px;font-weight:500;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="sample">
+    <div class="box" style="border-radius:12px;">card</div>
+    <span class="lbl">Card · 12</span>
+  </div>
+  <div class="sample">
+    <div class="box" style="border-radius:8px;background:#E07A5F;color:#fff;font-family:var(--sans);font-weight:500;">Botón</div>
+    <span class="lbl">Button · 8</span>
+  </div>
+  <div class="sample">
+    <div class="chip" style="border-radius:100px;">Categoría</div>
+    <span class="lbl">Chip · 100</span>
+  </div>
+  <div class="sample">
+    <div class="box" style="border-radius:4px;">input</div>
+    <span class="lbl">Input · 4</span>
+  </div>
+</div>
+</body>
+</html>

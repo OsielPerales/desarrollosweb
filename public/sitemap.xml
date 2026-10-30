@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Página Principal -->
+  <url>
+    <loc>https://desarrolloselaborados.com/</loc>
+    <lastmod>2025-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Soluciones IA -->
+  <url>
+    <loc>https://desarrolloselaborados.com/soluciones</loc>
+    <lastmod>2025-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Academia / iAprende -->
+  <url>
+    <loc>https://desarrolloselaborados.com/academia</loc>
+    <lastmod>2025-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Laboratorio de Validación -->
+  <url>
+    <loc>https://desarrolloselaborados.com/laboratorio</loc>
+    <lastmod>2025-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Nosotros -->
+  <url>
+    <loc>https://desarrolloselaborados.com/nosotros</loc>
+    <lastmod>2025-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contacto -->
+  <url>
+    <loc>https://desarrolloselaborados.com/contacto</loc>
+    <lastmod>2025-03-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Reporte IA 2025 (Lead Magnet) -->
+  <url>
+    <loc>https://desarrolloselaborados.com/reporte-ia-2025</loc>
+    <lastmod>2025-03-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Políticas -->
+  <url>
+    <loc>https://desarrolloselaborados.com/privacidad</loc>
+    <lastmod>2025-03-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://desarrolloselaborados.com/terminos</loc>
+    <lastmod>2025-03-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

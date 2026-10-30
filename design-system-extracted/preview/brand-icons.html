@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg-2);}
+  .card{padding:24px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;}
+  .icon{display:flex;flex-direction:column;align-items:center;gap:6px;color:#333;}
+  .icon svg{stroke:#333;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;fill:none;}
+  .lbl{font-family:var(--mono);font-size:10px;color:#8A8A8A;text-transform:uppercase;letter-spacing:0.06em;}
+  .note{margin-left:auto;font-family:var(--sans);font-size:12px;color:#5C5C5C;max-width:180px;line-height:1.4;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">
+    <svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg>
+    <span class="lbl">plus</span>
+  </div>
+  <div class="icon">
+    <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    <span class="lbl">search</span>
+  </div>
+  <div class="icon">
+    <svg width="24" height="24" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    <span class="lbl">arrow</span>
+  </div>
+  <div class="icon">
+    <svg width="24" height="24" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+    <span class="lbl">check</span>
+  </div>
+  <div class="icon">
+    <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+    <span class="lbl">info</span>
+  </div>
+  <div class="icon">
+    <svg width="24" height="24" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 4v16"/></svg>
+    <span class="lbl">layout</span>
+  </div>
+  <div class="note">Lucide · 1.75 stroke · inherits currentColor. See ICONOGRAPHY in README.</div>
+</div>
+</body>
+</html>

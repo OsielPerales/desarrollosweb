@@ -1,0 +1,20 @@
+{
+  "projects": {
+    "default": "studio-427958662-bd38c"
+  },
+  "targets": {
+    "studio-427958662-bd38c": {
+      "hosting": {
+        "app": [
+          "studio-427958662-bd38c"
+        ],
+        "iaprende": [
+          "iaprende-1415d"
+        ],
+        "hub": [
+          "hub-desarrollos"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin:0; padding:0; background: var(--bg-2); }
+  .card { padding: 24px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .col h4 { font-family: var(--mono); font-size: 10px; color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 8px; font-weight: 500; }
+  .body { font-family: 'Inter'; font-size: 15px; line-height: 1.55; color: #333; max-width: 48ch; }
+  .lede { font-family: 'Libre Baskerville'; font-style: italic; font-size: 18px; line-height: 1.45; color: #333; max-width: 48ch; }
+  .meta { font-family: 'JetBrains Mono'; font-size: 11px; color: #8A8A8A; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 6px; }
+  code { font-family: 'JetBrains Mono'; background: #F9F9F7; border: 1px solid var(--border); padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="col">
+    <h4>Body · Inter 15/24</h4>
+    <p class="body">Diseñamos cada decisión pensando en quien la va a usar mañana — y en diez años. El código que escribimos es el código que usamos.</p>
+    <div class="meta">Last edited · 2026-04-21</div>
+  </div>
+  <div class="col">
+    <h4>Lede · Baskerville italic 18</h4>
+    <p class="lede">«Herramientas que respetan tu tiempo.»</p>
+    <div class="meta">Inline <code>--accent</code> token</div>
+  </div>
+</div>
+</body>
+</html>

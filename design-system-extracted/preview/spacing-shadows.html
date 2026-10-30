@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:0;background:var(--bg-2);}
+  .card{padding:28px;display:flex;gap:24px;align-items:center;justify-content:space-around;}
+  .sample{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .box{width:140px;height:80px;background:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:#8A8A8A;}
+  .sm{box-shadow:0 2px 8px rgba(51,51,51,0.06);}
+  .md{box-shadow:0 8px 24px rgba(51,51,51,0.08);}
+  .lg{box-shadow:0 16px 48px rgba(51,51,51,0.10);}
+  .lbl{font-family:var(--mono);font-size:10px;color:#333;text-transform:uppercase;letter-spacing:0.08em;}
+  .val{font-family:var(--mono);font-size:10px;color:#8A8A8A;max-width:140px;text-align:center;line-height:1.3;}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="sample">
+    <div class="box sm">shadow-sm</div>
+    <span class="lbl">Resting</span>
+  </div>
+  <div class="sample">
+    <div class="box md">shadow-md</div>
+    <span class="lbl">Raised · hover</span>
+  </div>
+  <div class="sample">
+    <div class="box lg">shadow-lg</div>
+    <span class="lbl">Overlay · modal</span>
+  </div>
+</div>
+</body>
+</html>

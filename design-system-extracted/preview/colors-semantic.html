@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin:0; padding:0; background: var(--bg-2); }
+  .card { padding: 24px; }
+  .row { display: flex; gap: 10px; align-items: center; }
+  .cell { flex:1; border-radius: 8px; padding: 12px; min-height: 68px; display: flex; flex-direction: column; justify-content: space-between; }
+  .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; opacity: 0.75; }
+  .hex { font-family: var(--mono); font-size: 11px; }
+  .stack { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="row">
+    <div class="stack">
+      <div class="cell" style="background:#333;color:#fff;"><span class="lbl">fg-1</span><span class="hex">#333333</span></div>
+      <div class="cell" style="background:#5C5C5C;color:#fff;"><span class="lbl">fg-2</span><span class="hex">#5C5C5C</span></div>
+      <div class="cell" style="background:#8A8A8A;color:#fff;"><span class="lbl">fg-3</span><span class="hex">#8A8A8A</span></div>
+    </div>
+    <div class="stack">
+      <div class="cell" style="background:#E07A5F;color:#fff;"><span class="lbl">accent</span><span class="hex">#E07A5F</span></div>
+      <div class="cell" style="background:#C96647;color:#fff;"><span class="lbl">accent-hover</span><span class="hex">#C96647</span></div>
+      <div class="cell" style="background:#B55A3C;color:#fff;"><span class="lbl">accent-press</span><span class="hex">#B55A3C</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
