@@ -2,7 +2,7 @@
   "functions": [
     {
       "source": "functions",
-      "codebase": "default",
+      "codebase": "web-publica",
       "ignore": [
         "node_modules",
         ".git",
@@ -34,21 +34,6 @@
     {
       "target": "iaprende",
       "public": "dist-iaprende",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    },
-    {
-      "target": "hub",
-      "public": "dist-hub",
       "ignore": [
         "firebase.json",
         "**/.*",

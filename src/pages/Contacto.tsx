@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createLead } from '../hub/leadsService';
+import { createLead } from '../lib/leadsService';
 import { AlertCircle, ArrowRight, Check, Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react';
 import { useSEO } from '../hooks/useSEO';
 import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, WHATSAPP_URL } from '../lib/contact';
