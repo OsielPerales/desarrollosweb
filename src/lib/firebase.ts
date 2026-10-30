@@ -1,13 +1,20 @@
-// Public Firebase app and contact persistence.
-import { initializeApp, getApps } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getApps, initializeApp, type FirebaseOptions } from 'firebase/app';
+import { connectFirestoreEmulator, getFirestore, type Firestore } from 'firebase/firestore';
 
-// 🔑 Configuration — Replace with your actual Firebase project credentials
-// from https://console.firebase.google.com → Project Settings → Web App
-const firebaseConfig = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG || '{}');
+let contactDb: Firestore | undefined;
 
-// Initialize once (Vite hot-reload guard)
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-
-export const db = getFirestore(app);
-export default app;
+// The site and alternatives stay visible if public Firebase config is missing.
+export function getContactDb(): Firestore {
+  if (contactDb) return contactDb;
+  const config = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG || '{}') as FirebaseOptions;
+  if (!config.projectId || !config.appId || !config.apiKey) {
+    throw new Error('CONTACT_CONFIGURATION_MISSING');
+  }
+  const app = getApps().find((item) => item.name === 'public-contact')
+    ?? initializeApp(config, 'public-contact');
+  contactDb = getFirestore(app);
+  if (import.meta.env.DEV && import.meta.env.VITE_USE_FIRESTORE_EMULATOR === 'true') {
+    connectFirestoreEmulator(contactDb, '127.0.0.1', 8080);
+  }
+  return contactDb;
+}

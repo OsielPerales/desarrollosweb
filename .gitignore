@@ -29,3 +29,6 @@ npm-debug.log*
 # OS
 .DS_Store
 Thumbs.db
+# Generated isolated test rules and emulator output
+tests/generated/
+*-debug.log

@@ -1,23 +1,16 @@
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from './firebase';
+import { addDoc, collection, serverTimestamp, type Firestore } from 'firebase/firestore';
+import { getContactDb } from './firebase';
+import { validateContact, type ContactValues } from './contactValidation';
 
-interface ContactLead {
-  nombre: string;
-  email: string;
-  telefono: string;
-  empresa: string;
-  tipoEmpresa: string;
-  intereses: string[];
-  mensaje: string;
-  source: string;
-}
-
-export async function createLead(data: ContactLead): Promise<string> {
-  const result = await addDoc(collection(db, 'leads'), {
+// Resolves only after Firestore acknowledges the write.
+export async function createLead(values: ContactValues, database?: Firestore): Promise<string> {
+  const { data, errors } = validateContact(values);
+  if (Object.keys(errors).length) throw new Error('INVALID_CONTACT');
+  const result = await addDoc(collection(database ?? getContactDb(), 'leads'), {
     ...data,
-    status: 'nuevo',
+    estado: 'nuevo',
+    source: 'web_contacto',
     createdAt: serverTimestamp(),
-    updatedAt: serverTimestamp(),
   });
   return result.id;
 }
