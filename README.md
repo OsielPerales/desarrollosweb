@@ -43,3 +43,8 @@ Vite genera el sitio principal en `dist/`. El destino iAprende pertenece a otro 
 El código original se conserva sin cambios en la rama `hub-archive`, en el commit de origen `a4e9bf12c55d4ada03439e50713d21e51328ed95`. Sus pantallas, copias y funciones HTTP no forman parte de esta rama. La web usa un codebase de Functions independiente: `web-publica`.
 
 Retirar código del repositorio no desactiva funciones ya desplegadas. La retirada de las tres funciones legadas en Firebase requiere una acción separada del propietario antes de poner en servicio la web. Los comandos finales se entregan en la revisión; no se ha ejecutado ningún despliegue ni envío.
+
+
+## Estabilización y publicación
+
+Consultar [el informe de cambios y publicación](docs/ESTABILIZACION.md) y [la política de contacto y notificaciones](docs/REGLAS_Y_NOTIFICACIONES.md). La publicación está bloqueada hasta integrar las reglas activas del proyecto compartido y definir el correo.

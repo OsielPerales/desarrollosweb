@@ -5,6 +5,7 @@ interface SEOProps {
   description: string;
   canonicalPath?: string;
   ogImage?: string;
+  robots?: string;
 }
 
 const BASE_DOMAIN = 'https://desarrolloselaborados.com';
@@ -15,22 +16,31 @@ export function useSEO({
   description,
   canonicalPath = '/',
   ogImage = DEFAULT_OG_IMAGE,
+  robots = "index, follow",
 }: SEOProps) {
   useEffect(() => {
     // Title
     document.title = title;
 
     // Meta description
-    let metaDesc = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    const metaDesc = document.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (metaDesc) {
       metaDesc.content = description;
     }
 
     // Canonical
-    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (canonical) {
       canonical.href = `${BASE_DOMAIN}${canonicalPath}`;
     }
+
+    let robotsMeta = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
+    if (!robotsMeta) {
+      robotsMeta = document.createElement('meta');
+      robotsMeta.name = 'robots';
+      document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.content = robots;
 
     // OG Tags
     const ogTags: Record<string, string> = {
@@ -56,5 +66,5 @@ export function useSEO({
       const el = document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
       if (el) el.content = content;
     });
-  }, [title, description, canonicalPath, ogImage]);
+  }, [title, description, canonicalPath, ogImage, robots]);
 }

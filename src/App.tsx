@@ -1,3 +1,4 @@
+import { NotFound } from './pages/NotFound';
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
 import { Navbar } from './components/layout/Navbar';
@@ -49,6 +50,7 @@ function App() {
           <Route path="/reporte-ia-2025"   element={<Suspense fallback={<PageLoader />}><StrategicReport /></Suspense>} />
           <Route path="/privacidad"        element={<Suspense fallback={<PageLoader />}><Privacidad /></Suspense>} />
           <Route path="/terminos"          element={<Suspense fallback={<PageLoader />}><Terminos /></Suspense>} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </Router>

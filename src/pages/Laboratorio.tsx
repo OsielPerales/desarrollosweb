@@ -13,7 +13,7 @@ const capacidades = [
     icon: Ruler,
     title: 'Manufactura de precisión',
     description: 'Fabricamos prototipos y pequeñas series cuando el proyecto pide materializar y validar.',
-    specs: ['Precisión de referencia: ±0.01 mm', 'Prototipado y series cortas'],
+    specs: ['Tolerancias a confirmar por proyecto', 'Prototipado y series cortas'],
   },
   {
     icon: Shield,
@@ -101,8 +101,8 @@ export function Laboratorio() {
                     <div className="text-xs text-graphite/60 mt-1">entorno real de prueba</div>
                   </div>
                   <div className="bg-mint/20 rounded-2xl p-5 text-center">
-                    <div className="font-mono text-2xl text-graphite font-bold">100%</div>
-                    <div className="text-xs text-graphite/60 mt-1">aprendizaje aplicable</div>
+                    <div className="font-mono text-2xl text-graphite font-bold">Caso a caso</div>
+                    <div className="text-xs text-graphite/60 mt-1">validación del alcance</div>
                   </div>
                 </div>
 

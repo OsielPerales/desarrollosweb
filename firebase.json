@@ -26,8 +26,68 @@
       ],
       "rewrites": [
         {
-          "source": "**",
+          "source": "/soluciones",
           "destination": "/index.html"
+        },
+        {
+          "source": "/academia",
+          "destination": "/index.html"
+        },
+        {
+          "source": "/laboratorio",
+          "destination": "/index.html"
+        },
+        {
+          "source": "/nosotros",
+          "destination": "/index.html"
+        },
+        {
+          "source": "/contacto",
+          "destination": "/index.html"
+        },
+        {
+          "source": "/reporte-ia-2025",
+          "destination": "/index.html"
+        },
+        {
+          "source": "/privacidad",
+          "destination": "/index.html"
+        },
+        {
+          "source": "/terminos",
+          "destination": "/index.html"
+        }
+      ],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "strict-origin-when-cross-origin"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Permissions-Policy",
+              "value": "camera=(), microphone=(), geolocation=()"
+            }
+          ]
+        },
+        {
+          "source": "/index.html",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            }
+          ]
         }
       ]
     },

@@ -1,7 +1,9 @@
+import { useSEO } from '../hooks/useSEO';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, FileText } from 'lucide-react';
 
 export function Terminos() {
+  useSEO({ title: 'Términos de Servicio | Desarrollos Elaborados', description: 'Condiciones generales de los servicios y las solicitudes de Desarrollos Elaborados.', canonicalPath: '/terminos' });
   return (
     <main className="min-h-screen pt-20">
       <section className="section-cream py-16 md:py-24">

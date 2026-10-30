@@ -5,7 +5,7 @@ import { useSEO } from '../hooks/useSEO';
 export function Home() {
   useSEO({
     title: 'Desarrollos Elaborados | Consultoría IA & Capacitación a Medida',
-    description: 'Consultora líder en soluciones de IA y capacitación a medida para empresas industriales en México. Automatización inteligente, Orquestación de Agentes y plataforma educativa iAprende.',
+    description: 'Consultoría especializada en soluciones de IA y capacitación a medida para empresas industriales en México. Automatización inteligente, Orquestación de Agentes y plataforma educativa iAprende.',
     canonicalPath: '/',
   });
 
@@ -23,7 +23,7 @@ export function Home() {
           <div className="relative mt-10 lg:mt-0"><div className="relative z-10 bg-white rounded-2xl shadow-soft-lg p-8 space-y-6"><div className="absolute -top-4 -right-4 w-24 h-24 bg-mint rounded-full opacity-60 blur-2xl" /><div className="absolute -bottom-4 -left-4 w-32 h-32 bg-lavender rounded-full opacity-60 blur-2xl" /><div className="space-y-4">
             <Capability icon={<GraduationCap className="w-6 h-6 text-cobalt" />} title="Plataforma iAprende" subtitle="Capacitación y Prompt Engineering." description="El primer paso. Domina las herramientas de IA para entender su potencial en tu sector." color="bg-cobalt/10" />
             <Capability icon={<BrainCircuit className="w-6 h-6 text-orange" />} title="Desarrollo de Software y Agentes" subtitle="Soluciones a la medida (Agentes, Apps)." description="Creamos sistemas multiagente y aplicaciones impulsadas por IA que resuelven tus problemas específicos." color="bg-orange/10" />
-            <Capability icon={<Factory className="w-6 h-6 text-graphite" />} title="Laboratorio de Validación" subtitle="Ingeniería probada en el mundo real." description="Probamos nuestras tecnologías en nuestro propio ecosistema de manufactura (Corte y Diseño CNC) para garantizar su eficacia." color="bg-mint" />
+            <Capability icon={<Factory className="w-6 h-6 text-graphite" />} title="Laboratorio de Validación" subtitle="Ingeniería probada en el mundo real." description="Probamos nuestras tecnologías en nuestro propio ecosistema de manufactura (Corte y Diseño CNC) para evaluar su eficacia." color="bg-mint" />
           </div></div></div>
         </div></div>
       </section>

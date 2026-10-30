@@ -54,12 +54,12 @@ export function Footer() {
               style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', marginBottom: 16 }}
             >
               <img
-                src="/logo.png"
+                src="/logo.webp" width={800} height={258}
                 alt="Desarrollos Elaborados"
                 style={{
                   width: 196,
                   height: 52,
-                  objectFit: 'cover',
+                  objectFit: 'contain',
                   objectPosition: 'center 54%',
                   borderRadius: 8,
                 }}
