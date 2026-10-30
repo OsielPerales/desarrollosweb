@@ -51,19 +51,19 @@ export function Navbar() {
           style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
         >
           <img
-            src="/logo.png"
+            src="/logo.webp" width={800} height={258}
             alt="Desarrollos Elaborados"
             style={{
               width: 196,
               height: 52,
-              objectFit: 'cover',
+              objectFit: 'contain',
               objectPosition: 'center 54%',
             }}
           />
         </Link>
 
         {/* Desktop nav links */}
-        <div className="hidden md:flex items-center" style={{ gap: 28 }}>
+        <div className="hidden xl:flex items-center" style={{ gap: 28 }}>
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -104,7 +104,7 @@ export function Navbar() {
         </div>
 
         {/* Desktop actions */}
-        <div className="hidden md:flex items-center" style={{ gap: 12 }}>
+        <div className="hidden xl:flex items-center" style={{ gap: 12 }}>
           <a
             href="https://iaprende-1415d.web.app/login"
             target="_blank"
@@ -134,12 +134,11 @@ export function Navbar() {
         {/* Mobile toggle */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden"
+          className="xl:hidden flex"
           aria-label="Menú"
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-navigation"
           style={{
-            display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             width: 40,
@@ -158,7 +157,7 @@ export function Navbar() {
       {/* Mobile menu */}
       <div
         id="mobile-navigation"
-        className="md:hidden"
+        className="xl:hidden flex"
         style={{
           overflow: 'hidden',
           maxHeight: isMobileMenuOpen ? '28rem' : 0,

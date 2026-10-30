@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { createLead } from '../hub/leadsService';
+import { useRef, useState } from 'react';
+import { createLead } from '../lib/leadsService';
+import { CONTACT_LIMITS, validateContact, type ContactErrors, type ContactValues } from '../lib/contactValidation';
 import { AlertCircle, ArrowRight, Check, Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react';
 import { useSEO } from '../hooks/useSEO';
 import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, WHATSAPP_URL } from '../lib/contact';
@@ -44,7 +45,7 @@ export function Contacto() {
     canonicalPath: '/contacto',
   });
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactValues>({
     nombre: '',
     email: '',
     telefono: '',
@@ -55,18 +56,14 @@ export function Contacto() {
     etapa: '',
     urgencia: '',
     mensaje: '',
+    website: '',
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [errors, setErrors] = useState<{ nombre?: boolean; email?: boolean }>({});
-
-  const validate = () => {
-    const newErrors: { nombre?: boolean; email?: boolean } = {};
-    if (!formData.nombre.trim()) newErrors.nombre = true;
-    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = true;
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const [registeredId, setRegisteredId] = useState<string | null>(null);
+  const [isSending, setIsSending] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [errors, setErrors] = useState<ContactErrors>({});
+  const inFlight = useRef(false);
 
   const interesesLabels = formData.intereses
     .map((id) => intereses.find((i) => i.id === id)?.label)
@@ -97,26 +94,21 @@ export function Contacto() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
-
+    if (inFlight.current || registeredId) return;
+    const validation = validateContact(formData);
+    setErrors(validation.errors);
+    setSubmitError('');
+    if (Object.keys(validation.errors).length) return;
+    inFlight.current = true;
+    setIsSending(true);
     try {
-      await createLead({
-        nombre: formData.nombre,
-        email: formData.email,
-        telefono: formData.telefono,
-        empresa: formData.empresa,
-        tipoEmpresa: formData.tipoEmpresa,
-        intereses: formData.intereses,
-        mensaje: enrichedMessage,
-        source: 'web_contacto',
-      });
-      setIsSubmitted(true);
-    } catch (err) {
-      console.warn('[HUB] Error guardando lead en Firestore:', err);
-      const subject = encodeURIComponent(`Diagnóstico DE - ${formData.nombre}${formData.empresa ? ` (${formData.empresa})` : ''}`);
-      const body = encodeURIComponent(buildMailtoBody());
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-      setIsSubmitted(true);
+      const id = await createLead(validation.data);
+      setRegisteredId(id);
+    } catch {
+      setSubmitError('No pudimos registrar tu solicitud. Tus datos siguen aquí: pulsa Reintentar registro. También puedes usar correo o WhatsApp como alternativas.');
+    } finally {
+      inFlight.current = false;
+      setIsSending(false);
     }
   };
 
@@ -134,7 +126,7 @@ export function Contacto() {
       .filter(Boolean)
       .join(' | ');
 
-    window.open(`${WHATSAPP_URL}?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`${WHATSAPP_URL}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
   };
 
   const toggleInteres = (id: string) => {
@@ -146,7 +138,7 @@ export function Contacto() {
     }));
   };
 
-  if (isSubmitted) {
+  if (registeredId) {
     return (
       <main className="min-h-screen pt-20">
         <section className="section-cream min-h-[80vh] flex items-center">
@@ -156,8 +148,9 @@ export function Contacto() {
             </div>
             <h1 className="font-serif text-3xl md:text-4xl text-graphite mb-4">Tu solicitud ya quedó registrada</h1>
             <p className="text-graphite/70 mb-4">
-              Ahora llegaremos a la conversación con mejor contexto sobre tu etapa y prioridades.
+              Conserva el folio para dar seguimiento. El registro no confirma la entrega del correo de notificación.
             </p>
+            <p role="status" className="mb-5 text-sm">Folio: <strong className="font-mono break-all">{registeredId}</strong></p>
             <p className="text-graphite/60 text-sm mb-8">
               Si necesitas acelerar la conversación, puedes continuar por WhatsApp.
             </p>
@@ -180,7 +173,7 @@ export function Contacto() {
     );
   }
 
-  const inputClass = (hasError?: boolean) =>
+  const inputClass = (hasError?: string) =>
     `w-full px-4 py-3 rounded-xl border ${
       hasError ? 'border-red-400 focus:ring-red-200' : 'border-gray-200 focus:border-orange focus:ring-orange/20'
     } focus:ring-2 outline-none transition-all`;
@@ -207,7 +200,13 @@ export function Contacto() {
         <div className="max-w-[90rem] mx-auto px-6 md:px-12 lg:px-16">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-14 lg:gap-20 items-start">
             <div className="order-2 lg:order-1">
-              <form onSubmit={handleSubmit} noValidate className="space-y-8">
+              <form onSubmit={handleSubmit} noValidate className="space-y-8" aria-busy={isSending}>
+                <fieldset disabled={isSending} className="space-y-8 min-w-0">
+                <div className="absolute -left-[10000px] w-px h-px overflow-hidden" aria-hidden="true">
+                  <label htmlFor="website">Deja este campo vacío</label>
+                  <input id="website" name="website" tabIndex={-1} autoComplete="off"
+                    value={formData.website} onChange={(e) => setFormData({ ...formData, website: e.target.value })} />
+                </div>
                 <div className="space-y-6">
                   <h2 className="font-serif text-xl text-graphite">Información de contacto</h2>
 
@@ -218,22 +217,22 @@ export function Contacto() {
                       </label>
                       <input
                         type="text"
-                        id="nombre"
+                        id="nombre" maxLength={CONTACT_LIMITS.nombre}
                         name="nombre"
                         autoComplete="name"
                         required
-                        aria-invalid={errors.nombre || undefined}
+                        aria-invalid={Boolean(errors.nombre) || undefined} aria-describedby={errors.nombre ? "nombre-error" : undefined}
                         value={formData.nombre}
                         onChange={(e) => {
                           setFormData({ ...formData, nombre: e.target.value });
-                          if (errors.nombre) setErrors({ ...errors, nombre: false });
+                          if (errors.nombre) setErrors({ ...errors, nombre: undefined });
                         }}
                         className={inputClass(errors.nombre)}
                         placeholder="Tu nombre"
                       />
                       {errors.nombre && (
-                        <p className="text-red-500 text-xs mt-1 flex items-center gap-1">
-                          <AlertCircle className="w-3 h-3" /> Este campo es obligatorio
+                        <p id="nombre-error" className="text-red-500 text-xs mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3" /> {errors.nombre}
                         </p>
                       )}
                     </div>
@@ -244,22 +243,22 @@ export function Contacto() {
                       </label>
                       <input
                         type="email"
-                        id="email"
+                        id="email" maxLength={CONTACT_LIMITS.email}
                         name="email"
                         autoComplete="email"
                         required
-                        aria-invalid={errors.email || undefined}
+                        aria-invalid={Boolean(errors.email) || undefined} aria-describedby={errors.email ? "email-error" : undefined}
                         value={formData.email}
                         onChange={(e) => {
                           setFormData({ ...formData, email: e.target.value });
-                          if (errors.email) setErrors({ ...errors, email: false });
+                          if (errors.email) setErrors({ ...errors, email: undefined });
                         }}
                         className={inputClass(errors.email)}
                         placeholder="tu@empresa.com"
                       />
                       {errors.email && (
-                        <p className="text-red-500 text-xs mt-1 flex items-center gap-1">
-                          <AlertCircle className="w-3 h-3" /> Correo electrónico inválido
+                        <p id="email-error" className="text-red-500 text-xs mt-1 flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3" /> {errors.email}
                         </p>
                       )}
                     </div>
@@ -272,7 +271,7 @@ export function Contacto() {
                       </label>
                       <input
                         type="tel"
-                        id="telefono"
+                        id="telefono" maxLength={CONTACT_LIMITS.telefono}
                         name="telefono"
                         autoComplete="tel"
                         value={formData.telefono}
@@ -288,7 +287,7 @@ export function Contacto() {
                       </label>
                       <input
                         type="text"
-                        id="empresa"
+                        id="empresa" maxLength={CONTACT_LIMITS.empresa}
                         name="empresa"
                         autoComplete="organization"
                         value={formData.empresa}
@@ -307,6 +306,7 @@ export function Contacto() {
                       <button
                         key={tipo}
                         type="button"
+                        aria-pressed={formData.tipoEmpresa === tipo}
                         onClick={() => setFormData({ ...formData, tipoEmpresa: tipo })}
                         className={`px-4 py-2 rounded-full text-sm transition-all ${
                           formData.tipoEmpresa === tipo ? 'bg-orange text-white' : 'bg-cream text-graphite hover:bg-orange/10'
@@ -325,6 +325,7 @@ export function Contacto() {
                       <button
                         key={item}
                         type="button"
+                        aria-pressed={formData.objetivo === item}
                         onClick={() => setFormData({ ...formData, objetivo: item })}
                         className={`px-4 py-2 rounded-full text-sm transition-all ${
                           formData.objetivo === item ? 'bg-cobalt text-white' : 'bg-cream text-graphite hover:bg-cobalt/10'
@@ -344,7 +345,8 @@ export function Contacto() {
                         <button
                           key={item}
                           type="button"
-                          onClick={() => setFormData({ ...formData, etapa: item })}
+                          aria-pressed={formData.etapa === item}
+                        onClick={() => setFormData({ ...formData, etapa: item })}
                           className={`px-4 py-2 rounded-full text-sm transition-all ${
                             formData.etapa === item ? 'bg-orange text-white' : 'bg-cream text-graphite hover:bg-orange/10'
                           }`}
@@ -362,7 +364,8 @@ export function Contacto() {
                         <button
                           key={item}
                           type="button"
-                          onClick={() => setFormData({ ...formData, urgencia: item })}
+                          aria-pressed={formData.urgencia === item}
+                        onClick={() => setFormData({ ...formData, urgencia: item })}
                           className={`px-4 py-2 rounded-full text-sm transition-all ${
                             formData.urgencia === item ? 'bg-orange text-white' : 'bg-cream text-graphite hover:bg-orange/10'
                           }`}
@@ -382,6 +385,7 @@ export function Contacto() {
                       <button
                         key={interes.id}
                         type="button"
+                        aria-pressed={formData.intereses.includes(interes.id)}
                         onClick={() => toggleInteres(interes.id)}
                         className={`px-4 py-2 rounded-full text-sm transition-all ${
                           formData.intereses.includes(interes.id)
@@ -401,7 +405,7 @@ export function Contacto() {
                     Cuéntanos el contexto
                   </label>
                   <textarea
-                    id="mensaje"
+                    id="mensaje" maxLength={CONTACT_LIMITS.mensaje}
                     rows={5}
                     value={formData.mensaje}
                     onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
@@ -410,9 +414,13 @@ export function Contacto() {
                   />
                 </div>
 
+                {Object.entries(errors).filter(([key]) => key !== 'nombre' && key !== 'email').map(([key, message]) => (
+                  <p key={key} role="alert" className="text-red-700 text-sm">{message}</p>
+                ))}
+                {submitError && <p role="alert" className="rounded-xl bg-red-50 p-4 text-red-800 text-sm">{submitError}</p>}
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <button type="submit" className="btn-primary gap-2 flex items-center justify-center">
-                    Enviar solicitud
+                  <button type="submit" disabled={isSending} className="btn-primary gap-2 flex items-center justify-center disabled:opacity-60">
+                    {isSending ? 'Enviando…' : submitError ? 'Reintentar registro' : 'Registrar solicitud'}
                     <Send className="w-4 h-4" />
                   </button>
                   <button
@@ -424,6 +432,10 @@ export function Contacto() {
                     Prefiero WhatsApp
                   </button>
                 </div>
+                <p className="text-sm text-graphite/70">
+                  Correo y WhatsApp son alternativas: abrirlos no registra una solicitud en este formulario.
+                  {' '}<a className="underline" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Solicitud de contacto')}&body=${encodeURIComponent(buildMailtoBody())}`}>Prefiero correo</a>.
+                </p>
                 <p className="text-xs text-graphite/40">
                   Al enviar, autorizas el tratamiento de tus datos conforme a nuestra{' '}
                   <a href="/privacidad" className="underline hover:text-orange">
@@ -431,6 +443,7 @@ export function Contacto() {
                   </a>
                   .
                 </p>
+                </fieldset>
               </form>
             </div>
 

@@ -1,8 +1,10 @@
+import { useSEO } from '../hooks/useSEO';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Shield } from 'lucide-react';
 import { CONTACT_EMAIL } from '../lib/contact';
 
 export function Privacidad() {
+  useSEO({ title: 'Política de Privacidad | Desarrollos Elaborados', description: 'Información sobre el tratamiento de datos de contacto y solicitudes en Desarrollos Elaborados.', canonicalPath: '/privacidad' });
   return (
     <main className="min-h-screen pt-20">
       <section className="section-cream py-16 md:py-24">

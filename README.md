@@ -6,7 +6,7 @@ Portal web principal de Desarrollos Elaborados. Incluye las páginas públicas d
 
 - React 19, TypeScript y Vite
 - Tailwind CSS y componentes Radix UI
-- Firebase Authentication, Firestore y Functions
+- Firestore y Functions para el contacto público
 
 ## Desarrollo local
 
@@ -27,13 +27,24 @@ npm run build
 npm run preview
 ```
 
-Vite genera el sitio principal en `dist/`. Los directorios `dist-iaprende/` y `dist-hub/` corresponden a otros destinos de Hosting y también se mantienen fuera de Git. La configuración de Firebase Hosting está en `firebase.json`; revisa el proyecto seleccionado antes de desplegar.
+Vite genera el sitio principal en `dist/`. El destino iAprende pertenece a otro producto y no se publica desde este flujo. La configuración de Firebase Hosting está en `firebase.json`; revisa el proyecto seleccionado antes de desplegar.
 
 ## Estructura
 
 - `src/pages/`: páginas públicas del portal
-- `src/hub/`: interfaz y servicios del Hub
+- `src/lib/`: configuración pública y servicios de contacto
 - `src/components/`: componentes reutilizables
 - `functions/`: Firebase Cloud Functions
 - `public/`: recursos estáticos
 - `firebase.json`: destinos y rutas de Hosting
+
+## Hub pausado
+
+El código original se conserva sin cambios en la rama `hub-archive`, en el commit de origen `a4e9bf12c55d4ada03439e50713d21e51328ed95`. Sus pantallas, copias y funciones HTTP no forman parte de esta rama. La web usa un codebase de Functions independiente: `web-publica`.
+
+Retirar código del repositorio no desactiva funciones ya desplegadas. La retirada de las tres funciones legadas en Firebase requiere una acción separada del propietario antes de poner en servicio la web. Los comandos finales se entregan en la revisión; no se ha ejecutado ningún despliegue ni envío.
+
+
+## Estabilización y publicación
+
+Consultar [el informe de cambios y publicación](docs/ESTABILIZACION.md) y [la política de contacto y notificaciones](docs/REGLAS_Y_NOTIFICACIONES.md). La publicación está bloqueada hasta integrar las reglas activas del proyecto compartido y definir el correo.

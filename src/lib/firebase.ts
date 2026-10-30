@@ -1,22 +1,20 @@
-// Firebase App + Firestore + Auth
-import { initializeApp, getApps } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { getApps, initializeApp, type FirebaseOptions } from 'firebase/app';
+import { connectFirestoreEmulator, getFirestore, type Firestore } from 'firebase/firestore';
 
-// 🔑 Configuration — Replace with your actual Firebase project credentials
-// from https://console.firebase.google.com → Project Settings → Web App
-const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID,
-};
+let contactDb: Firestore | undefined;
 
-// Initialize once (Vite hot-reload guard)
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-
-export const db = getFirestore(app);
-export const auth = getAuth(app);
-export default app;
+// The site and alternatives stay visible if public Firebase config is missing.
+export function getContactDb(): Firestore {
+  if (contactDb) return contactDb;
+  const config = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG || '{}') as FirebaseOptions;
+  if (!config.projectId || !config.appId || !config.apiKey) {
+    throw new Error('CONTACT_CONFIGURATION_MISSING');
+  }
+  const app = getApps().find((item) => item.name === 'public-contact')
+    ?? initializeApp(config, 'public-contact');
+  contactDb = getFirestore(app);
+  if (import.meta.env.DEV && import.meta.env.VITE_USE_FIRESTORE_EMULATOR === 'true') {
+    connectFirestoreEmulator(contactDb, '127.0.0.1', 8080);
+  }
+  return contactDb;
+}

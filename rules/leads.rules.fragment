@@ -1,0 +1,30 @@
+// Merge only after reviewing the complete active project rules.
+// Broad recursive allow rules must also exclude leads: Firebase allows are ORed.
+match /leads/{id} {
+  function validLead() {
+    let d = request.resource.data;
+    let fields = ['nombre', 'email', 'telefono', 'empresa', 'tipoEmpresa',
+      'intereses', 'objetivo', 'etapa', 'urgencia', 'mensaje', 'website',
+      'estado', 'source', 'createdAt'];
+    return d.keys().hasAll(fields) && d.keys().hasOnly(fields)
+      && d.nombre is string && d.nombre.size() >= 2 && d.nombre.size() <= 120
+      && d.email is string && d.email.size() <= 254
+      && d.email.matches('^[^\\s@]+@[^\\s@]+[.][^\\s@]+$')
+      && d.telefono is string && d.telefono.size() <= 32
+      && (d.telefono == '' || d.telefono.matches('^[+0-9() .-]{7,32}$'))
+      && d.empresa is string && d.empresa.size() <= 160
+      && d.tipoEmpresa is string && d.tipoEmpresa.size() <= 80
+      && d.objetivo is string && d.objetivo.size() <= 100
+      && d.etapa is string && d.etapa.size() <= 80
+      && d.urgencia is string && d.urgencia.size() <= 60
+      && d.mensaje is string && d.mensaje.size() <= 3000
+      && d.intereses is list && d.intereses.size() <= 5
+      && d.intereses.toSet().size() == d.intereses.size()
+      && d.intereses.hasOnly(['software', 'ia', 'consultoria', 'academia', 'cnc'])
+      && d.website is string && d.website == ''
+      && d.estado == 'nuevo' && d.source == 'web_contacto'
+      && d.createdAt is timestamp && d.createdAt == request.time;
+  }
+  allow create: if validLead();
+  allow read, update, delete: if false;
+}

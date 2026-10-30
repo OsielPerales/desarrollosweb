@@ -121,7 +121,7 @@ GitHub: `OsielPerales/studio` (rama master, migrado desde Firebase Studio)
 **hub-desarrollos.web.app**
 
 ### Stack
-React 19 + TypeScript + Vite + Firebase (Auth + Firestore + Hosting) + Gemini API (REST directo via `VITE_GEMINI_API_KEY`)
+Documento histórico: el Hub está archivado en `hub-archive`. La rama de estabilización sirve la web pública con React, TypeScript, Vite y contacto mediante Firestore. No usa claves de proveedores de IA en el cliente.
 
 ### Módulos (9)
 Pipeline CRM · SCOUT · PROSPECTOR · NEXO · REDACTOR · Bandeja · Cotizaciones · Analítica · Campañas
