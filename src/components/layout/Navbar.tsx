@@ -22,6 +22,10 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const isActive = (path: string) =>
     path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
 
@@ -51,14 +55,9 @@ export function Navbar() {
           style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
         >
           <img
-            src="/logo.webp" width={800} height={258}
+              src="/logo.webp" width={800} height={258}
             alt="Desarrollos Elaborados"
-            style={{
-              width: 196,
-              height: 52,
-              objectFit: 'contain',
-              objectPosition: 'center 54%',
-            }}
+            className="navbar-logo"
           />
         </Link>
 
@@ -133,9 +132,10 @@ export function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          type="button"
+          onClick={() => setIsMobileMenuOpen((open) => !open)}
           className="xl:hidden flex"
-          aria-label="Menú"
+          aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-navigation"
           style={{
@@ -157,16 +157,11 @@ export function Navbar() {
       {/* Mobile menu */}
       <div
         id="mobile-navigation"
-        className="xl:hidden flex"
-        style={{
-          overflow: 'hidden',
-          maxHeight: isMobileMenuOpen ? '28rem' : 0,
-          transition: 'max-height 300ms cubic-bezier(0.2,0.6,0.2,1)',
-          background: '#fff',
-          borderTop: isMobileMenuOpen ? '1px solid var(--border-color)' : 'none',
-        }}
+        className={`xl:hidden grid mobile-navigation ${isMobileMenuOpen ? 'is-open' : ''}`}
+        aria-hidden={!isMobileMenuOpen}
+        inert={!isMobileMenuOpen}
       >
-        <div className="container-inner py-5 flex flex-col" style={{ gap: 2 }}>
+        <div className="container-inner mobile-navigation-inner flex flex-col">
           {navLinks.map((link) => (
             <Link
               key={link.path}
