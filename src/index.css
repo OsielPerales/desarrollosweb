@@ -516,3 +516,11 @@ img, video, canvas { max-width: 100%; height: auto; }
     transition-duration: 0.01ms !important;
   }
 }
+
+ 
+/* Touchscreens do not have a dependable hover interaction. */
+@media (hover: none) {
+  .touch-capability-description {
+    grid-template-rows: 1fr !important;
+  }
+}
