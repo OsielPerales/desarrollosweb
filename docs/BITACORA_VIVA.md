@@ -99,3 +99,12 @@ No marcar como validado algo que solo haya sido inspeccionado en el código. No 
 - Advertencias no bloqueantes observadas: la base de datos de Browserslist está desactualizada y `superstatic` declara Node 20/22/24 mientras el build se ejecutó en Node 26.13.0. El build terminó correctamente pese a esas advertencias.
 - `npm test` y `npm run lint` siguen sin estar ejecutados: el comando de build de Vercel no los incluye.
 - La inspección visual manual en los viewports de la matriz sigue pendiente. El preview está disponible para esa revisión.
+
+
+### Cierre de seguimiento — último commit de bitácora compilado
+
+- Commit actual de la rama al registrar esta actualización: `e26af036490ef1b6ddf08a13d6131f6df3e1fbed`.
+- Su deployment Vercel quedó en estado `READY` y el check `Vercel` en `success`.
+- El preview que corresponde al último commit es [esta versión de revisión](https://desarrollos-web-review-i1p1euxdl-desarrollos-elaborados.vercel.app/).
+- El PR #2 continúa abierto en borrador, sin fusionar, con la rama `estabilizacion` como destino.
+- Pendientes que permanecen: ejecución de `npm test`, `npm run lint` y revisión visual manual en dispositivos/viewports reales.
