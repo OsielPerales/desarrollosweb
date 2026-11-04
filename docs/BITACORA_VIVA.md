@@ -88,3 +88,14 @@ No marcar como validado algo que solo haya sido inspeccionado en el código. No 
 - GitHub reportó el PR como integrable (`mergeable: true`) al consultar sus metadatos.
 - El estado de Vercel para el commit del PR seguía en `pending` en la última consulta; no se interpreta como build aprobado.
 - Firebase Hosting no se publicó. La rama `main` permanece intacta.
+
+
+### Seguimiento — build de preview completado
+
+- Commit validado: `832129f421886daea07441e063f2935713c55f64`.
+- Check de GitHub `Vercel`: `success`.
+- Deployment preview: [abrir versión de revisión](https://desarrollos-web-review-njkd2du7z-desarrollos-elaborados.vercel.app/). Estado `READY`.
+- Los logs confirman `npm run build` → `tsc -b && vite build`; TypeScript y compilación Vite finalizaron correctamente. Vite transformó 1,745 módulos y reportó `built in 4.54s`; Vercel reportó `Deployment completed`.
+- Advertencias no bloqueantes observadas: la base de datos de Browserslist está desactualizada y `superstatic` declara Node 20/22/24 mientras el build se ejecutó en Node 26.13.0. El build terminó correctamente pese a esas advertencias.
+- `npm test` y `npm run lint` siguen sin estar ejecutados: el comando de build de Vercel no los incluye.
+- La inspección visual manual en los viewports de la matriz sigue pendiente. El preview está disponible para esa revisión.
