@@ -38,13 +38,8 @@ export function Footer() {
     <footer style={{ background: 'var(--title-color)', color: '#F9F9F7' }}>
       <div className="container-inner" style={{ paddingTop: 56, paddingBottom: 56 }}>
         <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '2fr 1fr 1fr 1fr',
-            gap: 40,
-            alignItems: 'start',
-          }}
-          className="grid-cols-1 sm:grid-cols-2 lg:!grid-cols-[2fr_1fr_1fr_1fr]"
+          style={{ display: 'grid', alignItems: 'start' }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[minmax(0,2fr)_repeat(3,minmax(0,1fr))] gap-8 xl:gap-10"
         >
           {/* Brand column */}
           <div>
@@ -56,13 +51,8 @@ export function Footer() {
               <img
                 src="/logo.webp" width={800} height={258}
                 alt="Desarrollos Elaborados"
-                style={{
-                  width: 196,
-                  height: 52,
-                  objectFit: 'contain',
-                  objectPosition: 'center 54%',
-                  borderRadius: 8,
-                }}
+                className="navbar-logo"
+                style={{ borderRadius: 8 }}
               />
             </Link>
             <p

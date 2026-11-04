@@ -354,3 +354,173 @@
     animation: none;
   }
 }
+
+/* Responsive system — Desarrollos Elaborados */
+:root {
+  --de-header-height: 72px;
+  --de-mobile-gutter: clamp(1rem, 5vw, 1.25rem);
+}
+
+html { scroll-padding-top: calc(var(--de-header-height) + 1rem); }
+body { min-width: 320px; overflow-x: clip; }
+#root { min-height: 100svh; }
+
+img, video, canvas { max-width: 100%; height: auto; }
+
+.page-transition {
+  min-width: 0;
+  animation: page-enter 220ms cubic-bezier(0.2, 0.6, 0.2, 1) both;
+}
+
+.page-loader { min-height: clamp(20rem, 60svh, 42rem); }
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* La altura del menú móvil sigue el contenido real y no un max-height fijo. */
+.mobile-navigation {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  border-top: 1px solid transparent;
+  transition:
+    grid-template-rows 260ms cubic-bezier(0.2, 0.6, 0.2, 1),
+    opacity 180ms ease,
+    border-color 180ms ease,
+    visibility 0s linear 260ms;
+}
+
+.mobile-navigation.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  border-top-color: var(--border-color);
+  transition-delay: 0s;
+}
+
+.mobile-navigation-inner {
+  min-height: 0;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  gap: 2px;
+  transition: padding 260ms cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.mobile-navigation.is-open .mobile-navigation-inner {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.navbar-logo {
+  display: block;
+  width: clamp(148px, 50vw, 196px);
+  max-height: 48px;
+  height: auto;
+  aspect-ratio: 800 / 258;
+  object-fit: contain;
+}
+
+@media (max-width: 767px) {
+  .container-inner {
+    padding-left: var(--de-mobile-gutter) !important;
+    padding-right: var(--de-mobile-gutter) !important;
+  }
+
+  main > section:not(.min-h-screen) {
+    padding-top: clamp(3.25rem, 10vw, 4rem) !important;
+    padding-bottom: clamp(3.25rem, 10vw, 4rem) !important;
+  }
+
+  main > section.min-h-screen {
+    min-height: calc(100svh - var(--de-header-height));
+    padding-top: calc(var(--de-header-height) + 2rem) !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  main h1.font-serif {
+    font-size: clamp(2.125rem, 8.5vw, 2.5rem) !important;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  main h2.text-3xl,
+  main h2.text-4xl {
+    font-size: clamp(1.75rem, 6.5vw, 2.125rem) !important;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  main .p-8,
+  main .p-9,
+  main .p-10,
+  main .p-12 {
+    padding: 1.375rem !important;
+  }
+
+  main .mb-16 { margin-bottom: 2.5rem !important; }
+  main .gap-14 { gap: 2rem !important; }
+  main .gap-20 { gap: 2.5rem !important; }
+
+  .btn-primary,
+  .btn-secondary {
+    min-height: 48px;
+    padding-left: 1.125rem;
+    padding-right: 1.125rem;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .flex-col > .btn-primary,
+  .flex-col > .btn-secondary { width: 100%; }
+
+  input, select, textarea { font-size: 16px !important; }
+
+  footer .container-inner {
+    padding-top: 2.75rem !important;
+    padding-bottom: 2.75rem !important;
+  }
+
+  footer .grid {
+    row-gap: 1.75rem;
+    column-gap: 1.75rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .container-inner {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  main h1.font-serif {
+    font-size: clamp(1.95rem, 8.5vw, 2.15rem) !important;
+  }
+
+  main .grid-cols-2 {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+ 
+/* Touchscreens do not have a dependable hover interaction. */
+@media (hover: none) {
+  .touch-capability-description {
+    grid-template-rows: 1fr !important;
+  }
+}

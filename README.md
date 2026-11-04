@@ -48,3 +48,5 @@ Retirar código del repositorio no desactiva funciones ya desplegadas. La retira
 ## Estabilización y publicación
 
 Consultar [el informe de cambios y publicación](docs/ESTABILIZACION.md) y [la política de contacto y notificaciones](docs/REGLAS_Y_NOTIFICACIONES.md). La publicación está bloqueada hasta integrar las reglas activas del proyecto compartido y definir el correo.
+
+La revisión responsive y de transiciones se documenta en [el plan de mejoras](docs/PLAN_RESPONSIVE_Y_MOTION.md) y en la [bitácora viva](docs/BITACORA_VIVA.md).
