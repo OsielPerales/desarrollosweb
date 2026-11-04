@@ -1,6 +1,6 @@
 import { NotFound } from './pages/NotFound';
 import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet, useLocation } from 'react-router-dom';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { ScrollToTop } from './components/layout/ScrollToTop';
@@ -17,17 +17,19 @@ const Terminos       = lazy(() => import('./pages/Terminos').then(m => ({ defaul
 
 function PageLoader() {
   return (
-    <div className="min-h-[60vh] flex items-center justify-center">
+    <div className="page-loader flex items-center justify-center">
       <div className="w-8 h-8 border-2 border-orange border-t-transparent rounded-full animate-spin" />
     </div>
   );
 }
 
 function PublicLayout() {
+  const location = useLocation();
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <div className="flex-1">
+      <div key={location.pathname} className="flex-1 page-transition">
         <Outlet />
       </div>
       <Footer />
