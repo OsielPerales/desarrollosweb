@@ -79,3 +79,12 @@ Agregar una nueva sección al inicio del historial con:
 - pendientes, riesgos y estado de publicación.
 
 No marcar como validado algo que solo haya sido inspeccionado en el código. No registrar un despliegue si únicamente se creó o fusionó un PR.
+
+
+### Seguimiento — revisión abierta
+
+- PR de revisión: [#2 — Mejorar proporciones móviles y transiciones](https://github.com/OsielPerales/desarrollosweb/pull/2), en borrador y dirigido a `estabilizacion`; no está fusionado.
+- Al abrir el PR, la comparación acumulada reportó 11 commits, 9 archivos, 424 adiciones y 36 eliminaciones respecto de la rama base.
+- GitHub reportó el PR como integrable (`mergeable: true`) al consultar sus metadatos.
+- El estado de Vercel para el commit del PR seguía en `pending` en la última consulta; no se interpreta como build aprobado.
+- Firebase Hosting no se publicó. La rama `main` permanece intacta.
